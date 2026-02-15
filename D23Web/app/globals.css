@@ -4,45 +4,69 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Light Background - ICC Inspired */
   --background: #FAFAFA;
   --foreground: #171717;
   --card: #FFFFFF;
   --card-foreground: #171717;
   --popover: #FFFFFF;
   --popover-foreground: #171717;
-  --primary: #7c3aed;
+
+  /* Primary Colors - Deep Purple (ICC T20) */
+  --primary: #6d28d9;
   --primary-foreground: #ffffff;
+
+  /* Secondary - Keep neutral */
   --secondary: #f5f5f4;
   --secondary-foreground: #1c1917;
   --muted: #f5f5f4;
   --muted-foreground: #737373;
-  --accent: #6366f1;
-  --accent-foreground: #ffffff;
+
+  /* Accent - Orange/Yellow (ICC Lightning) */
+  --accent: #f59e0b;
+  --accent-foreground: #171717;
+  --accent-secondary: #fb923c;
+
+  /* Energy Colors - ICC Inspired */
+  --energy-orange: #f97316;
+  --energy-yellow: #fbbf24;
+  --energy-amber: #f59e0b;
+
+  /* Brand Colors */
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #e5e5e5;
   --input: #e5e5e5;
-  --ring: #7c3aed;
-  --brand: #7c3aed;
-  --chart-1: #7c3aed;
-  --chart-2: #6366f1;
-  --chart-3: #8b5cf6;
-  --chart-4: #a78bfa;
-  --chart-5: #818cf8;
+  --ring: #6d28d9;
+  --brand: #6d28d9;
+
+  /* Chart Colors - Purple + Orange Gradient */
+  --chart-1: #6d28d9;
+  --chart-2: #7c3aed;
+  --chart-3: #f97316;
+  --chart-4: #fb923c;
+  --chart-5: #fbbf24;
+
+  /* Enhanced Shadows with Purple + Orange glow */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.05);
   --shadow-md: 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.06);
   --shadow-lg: 0 2px 4px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.08);
   --shadow-xl: 0 4px 8px rgba(0,0,0,0.06), 0 16px 40px rgba(0,0,0,0.1);
-  --shadow-violet: 0 2px 4px rgba(124,58,237,0.08), 0 8px 24px rgba(124,58,237,0.12);
+  --shadow-violet: 0 2px 4px rgba(109,40,217,0.12), 0 8px 24px rgba(109,40,217,0.15);
+  --shadow-orange: 0 2px 4px rgba(249,115,22,0.12), 0 8px 24px rgba(249,115,22,0.15);
+  --shadow-energy: 0 4px 12px rgba(109,40,217,0.1), 0 8px 24px rgba(249,115,22,0.1);
+
   --radius: 0.625rem;
+
+  /* Sidebar */
   --sidebar: #FAFAFA;
   --sidebar-foreground: #171717;
-  --sidebar-primary: #7c3aed;
+  --sidebar-primary: #6d28d9;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #f5f5f4;
   --sidebar-accent-foreground: #1c1917;
   --sidebar-border: #e5e5e5;
-  --sidebar-ring: #7c3aed;
+  --sidebar-ring: #6d28d9;
 }
 
 .dark {
@@ -260,3 +284,131 @@
   50% { box-shadow: 0 6px 20px rgba(37,211,102,0.5); }
 }
 .animate-whatsapp-pulse { animation: whatsappPulse 3s ease-in-out infinite; }
+
+/* ICC T20 Inspired - Circular Pattern Background */
+@keyframes circularPattern {
+  0% { transform: rotate(0deg) scale(1); opacity: 0.3; }
+  50% { transform: rotate(180deg) scale(1.1); opacity: 0.2; }
+  100% { transform: rotate(360deg) scale(1); opacity: 0.3; }
+}
+
+.pattern-circles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.pattern-circles::before,
+.pattern-circles::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid;
+  animation: circularPattern 20s ease-in-out infinite;
+}
+
+.pattern-circles::before {
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: -100px;
+  border-color: rgba(109, 40, 217, 0.1);
+  animation-duration: 25s;
+}
+
+.pattern-circles::after {
+  width: 350px;
+  height: 350px;
+  bottom: -80px;
+  right: -80px;
+  border-color: rgba(249, 115, 22, 0.1);
+  animation-duration: 30s;
+  animation-direction: reverse;
+}
+
+/* Energy Pulse - ICC Lightning Effect */
+@keyframes energyPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(109, 40, 217, 0.3),
+                0 0 40px rgba(249, 115, 22, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(109, 40, 217, 0.5),
+                0 0 60px rgba(249, 115, 22, 0.4);
+  }
+}
+
+.animate-energy-pulse {
+  animation: energyPulse 3s ease-in-out infinite;
+}
+
+/* Lightning Bolt Animation - ICC Style */
+@keyframes lightning {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.05) rotate(-2deg);
+    filter: brightness(1.2);
+  }
+  50% {
+    transform: scale(0.95) rotate(2deg);
+    filter: brightness(1.1);
+  }
+  75% {
+    transform: scale(1.02) rotate(-1deg);
+    filter: brightness(1.15);
+  }
+}
+
+.animate-lightning {
+  animation: lightning 4s ease-in-out infinite;
+}
+
+/* Gradient Shimmer - Purple to Orange */
+@keyframes gradientShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-energy-gradient {
+  background: linear-gradient(
+    135deg,
+    #6d28d9 0%,
+    #7c3aed 25%,
+    #f97316 75%,
+    #fb923c 100%
+  );
+  background-size: 200% 200%;
+  animation: gradientShimmer 8s ease infinite;
+}
+
+/* Circular Swirl Pattern (ICC Style) */
+.pattern-swirls {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(109, 40, 217, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(109, 40, 217, 0.03) 0%, transparent 70%);
+}
+
+/* Energy Badge - Orange Accent */
+.energy-badge {
+  background: linear-gradient(135deg, #f97316, #fbbf24);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+/* T20 Style Bold Text Glow */
+.text-glow-energy {
+  text-shadow:
+    0 0 10px rgba(109, 40, 217, 0.3),
+    0 0 20px rgba(249, 115, 22, 0.2);
+}

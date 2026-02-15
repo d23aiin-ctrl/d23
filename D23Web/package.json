@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
-    "lint": "eslint .",
+    "build": "next build",
     "start": "next start",
+    "lint": "eslint .",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "env:d23ai": "cp .env.d23.ai .env.local && echo '✅ Configured for d23.ai'",
+    "env:d23ai-in": "cp .env.d23ai.in .env.local && echo '✅ Configured for d23ai.in'",
+    "deploy:d23ai": "npm run env:d23ai && npm run build",
+    "deploy:d23ai-in": "npm run env:d23ai-in && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
