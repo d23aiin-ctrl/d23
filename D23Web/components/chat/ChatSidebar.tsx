@@ -85,7 +85,7 @@ export function ChatSidebar({
     <aside
       className={`${
         sidebarOpen ? "w-72" : "w-0"
-      } transition-all duration-300 ease-in-out flex flex-col bg-background border-r border-border overflow-hidden`}
+      } transition-all duration-300 ease-in-out flex flex-col bg-neutral-50 border-r border-neutral-200 overflow-hidden`}
     >
       <div className="flex-shrink-0 p-4">
         <Button
@@ -101,10 +101,10 @@ export function ChatSidebar({
         <div className="space-y-1 pb-4">
           {isLoadingConversations ? (
             <div className="flex justify-center py-8">
-              <div className="h-5 w-5 animate-spin rounded-full border-2 border-muted-foreground border-t-primary" />
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-neutral-400 border-t-primary" />
             </div>
           ) : conversations.length === 0 ? (
-            <p className="text-center text-sm text-muted-foreground py-8">
+            <p className="text-center text-sm text-neutral-500 py-8">
               No conversations yet
             </p>
           ) : (
@@ -113,8 +113,8 @@ export function ChatSidebar({
                 key={conv.id}
                 className={`group flex items-center gap-2 px-3 py-2.5 rounded-lg cursor-pointer transition-colors ${
                   currentConversationId === conv.id
-                    ? "bg-primary/20 text-foreground"
-                    : "hover:bg-accent text-muted-foreground hover:text-foreground"
+                    ? "bg-white border border-neutral-200 shadow-sm text-neutral-900"
+                    : "hover:bg-neutral-100 text-neutral-500 hover:text-neutral-900"
                 }`}
               >
                 <MessageSquare className="h-4 w-4 flex-shrink-0 opacity-60" />
@@ -128,7 +128,7 @@ export function ChatSidebar({
                         if (e.key === "Escape") onCancelEdit();
                       }}
                       autoFocus
-                      className="flex-1 bg-muted border border-primary rounded px-2 py-1 focus:outline-none text-sm"
+                      className="flex-1 bg-neutral-100 border border-primary rounded px-2 py-1 focus:outline-none text-sm text-neutral-900"
                     />
                     <Button
                       variant="ghost"
@@ -159,7 +159,7 @@ export function ChatSidebar({
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-7 w-7 hover:bg-accent"
+                        className="h-7 w-7 hover:bg-neutral-200"
                         onClick={(e) => {
                           e.stopPropagation();
                           onBeginEdit(conv.id, conv.title);
@@ -169,19 +169,19 @@ export function ChatSidebar({
                       </Button>
                       <AlertDialog>
                         <AlertDialogTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-accent">
+                          <Button variant="ghost" size="icon" className="h-7 w-7 hover:bg-neutral-200">
                             <Trash2 className="h-3.5 w-3.5" />
                           </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className="bg-background border-border">
+                        <AlertDialogContent className="bg-white border-neutral-200">
                           <AlertDialogHeader>
                             <AlertDialogTitle>Delete conversation?</AlertDialogTitle>
-                            <AlertDialogDescription className="text-muted-foreground">
+                            <AlertDialogDescription className="text-neutral-500">
                               This will permanently delete this conversation and all its messages.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel className="bg-muted border-border hover:bg-accent">Cancel</AlertDialogCancel>
+                            <AlertDialogCancel className="bg-neutral-100 border-neutral-200 hover:bg-neutral-200">Cancel</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => onDelete(conv.id)}
                               className="bg-destructive hover:bg-destructive/90"
@@ -201,18 +201,18 @@ export function ChatSidebar({
       </ScrollArea>
 
       {/* Connections Panel or Toggle Button */}
-      <div className="flex-shrink-0 border-t border-border">
+      <div className="flex-shrink-0 border-t border-neutral-200">
         {showConnections ? (
           <div className="flex flex-col" style={{ maxHeight: "320px" }}>
-            <div className="flex items-center justify-between px-3 py-2 border-b border-border bg-muted/30">
-              <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider flex items-center gap-2">
+            <div className="flex items-center justify-between px-3 py-2 border-b border-neutral-200 bg-neutral-100/30">
+              <span className="text-xs font-medium text-neutral-500 uppercase tracking-wider flex items-center gap-2">
                 <Link2 className="h-3.5 w-3.5" />
                 Tools & Connections
               </span>
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-6 w-6 hover:bg-accent"
+                className="h-6 w-6 hover:bg-neutral-200"
                 onClick={() => setShowConnections(false)}
               >
                 <ChevronDown className="h-4 w-4" />
@@ -230,7 +230,7 @@ export function ChatSidebar({
           <div className="p-3 space-y-1">
             <Button
               variant="ghost"
-              className="w-full justify-between gap-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+              className="w-full justify-between gap-3 text-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               onClick={() => setShowConnections(true)}
             >
               <span className="flex items-center gap-3">
@@ -241,7 +241,7 @@ export function ChatSidebar({
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+              className="w-full justify-start gap-3 text-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               onClick={() => router.push("/persona")}
             >
               <Bot className="h-4 w-4" />
@@ -249,7 +249,7 @@ export function ChatSidebar({
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+              className="w-full justify-start gap-3 text-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               onClick={() => handleProtectedNavigation("/profile")}
             >
               <User className="h-4 w-4" />
@@ -257,7 +257,7 @@ export function ChatSidebar({
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+              className="w-full justify-start gap-3 text-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               onClick={() => handleProtectedNavigation("/knowledge-base")}
             >
               <BookOpen className="h-4 w-4" />
@@ -265,7 +265,7 @@ export function ChatSidebar({
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+              className="w-full justify-start gap-3 text-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               onClick={() => handleProtectedNavigation("/tasks")}
             >
               <Calendar className="h-4 w-4" />
@@ -273,7 +273,7 @@ export function ChatSidebar({
             </Button>
             <Button
               variant="ghost"
-              className="w-full justify-start gap-3 text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+              className="w-full justify-start gap-3 text-sm text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
               onClick={() => handleProtectedNavigation("/settings")}
             >
               <Wrench className="h-4 w-4" />

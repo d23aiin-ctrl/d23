@@ -98,14 +98,14 @@ export default function ChatPage() {
 
   // Quick tools configuration
   const quickTools = [
-    { icon: Cloud, label: "Weather", prompt: "What's the weather in ", color: "text-cyan-400" },
-    { icon: Train, label: "PNR Status", prompt: "Check PNR ", color: "text-green-400" },
-    { icon: Star, label: "Horoscope", prompt: "My horoscope for ", color: "text-purple-400" },
-    { icon: Newspaper, label: "News", prompt: "Show me today's news about ", color: "text-orange-400" },
-    { icon: Hash, label: "Numerology", prompt: "Numerology for ", color: "text-pink-400" },
-    { icon: Languages, label: "Translate", prompt: "Translate to Hindi: ", color: "text-blue-400" },
-    { icon: ImageIcon, label: "Generate Image", prompt: "Create an image of ", color: "text-rose-400" },
-    { icon: Calendar, label: "Panchang", prompt: "What's today's panchang?", color: "text-amber-400" },
+    { icon: Cloud, label: "Weather", prompt: "What's the weather in ", color: "text-cyan-500" },
+    { icon: Train, label: "PNR Status", prompt: "Check PNR ", color: "text-green-500" },
+    { icon: Star, label: "Horoscope", prompt: "My horoscope for ", color: "text-purple-500" },
+    { icon: Newspaper, label: "News", prompt: "Show me today's news about ", color: "text-orange-500" },
+    { icon: Hash, label: "Numerology", prompt: "Numerology for ", color: "text-pink-500" },
+    { icon: Languages, label: "Translate", prompt: "Translate to Hindi: ", color: "text-blue-500" },
+    { icon: ImageIcon, label: "Generate Image", prompt: "Create an image of ", color: "text-rose-500" },
+    { icon: Calendar, label: "Panchang", prompt: "What's today's panchang?", color: "text-amber-500" },
   ];
 
   // Scroll handling
@@ -823,14 +823,14 @@ export default function ChatPage() {
   // Loading state
   if (loading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-black">
+      <div className="flex h-screen items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 p-[2px] animate-spin">
-            <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-violet-400" />
+          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 p-[2px] animate-spin">
+            <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-violet-600" />
             </div>
           </div>
-          <p className="text-zinc-400">Loading...</p>
+          <p className="text-neutral-500">Loading...</p>
         </div>
       </div>
     );
@@ -878,11 +878,11 @@ export default function ChatPage() {
       })();
 
   return (
-    <div className="flex h-screen bg-black text-white overflow-hidden">
+    <div className="flex h-screen bg-white text-neutral-900 overflow-hidden">
       {/* Background */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-100/40 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-indigo-100/40 rounded-full blur-[120px]" />
       </div>
 
       <ChatSidebar
@@ -937,7 +937,7 @@ export default function ChatPage() {
         />
 
         {/* Input Area */}
-        <div className="flex-shrink-0 border-t border-zinc-800 p-4 bg-black/50 backdrop-blur-xl">
+        <div className="flex-shrink-0 border-t border-neutral-200 p-4 bg-white/80 backdrop-blur-xl">
           <div className="max-w-3xl mx-auto space-y-3">
             {/* Suggestion Chips - Always visible above input */}
             {!isSending && (
@@ -959,7 +959,7 @@ export default function ChatPage() {
                       setInputMessage(suggestion.prompt);
                       inputRef.current?.focus();
                     }}
-                    className="px-3 py-1.5 text-sm bg-zinc-800/60 hover:bg-zinc-700/80 text-zinc-300 hover:text-white rounded-full border border-zinc-700/50 hover:border-zinc-600 transition-all duration-200"
+                    className="px-3 py-1.5 text-sm bg-neutral-100/80 hover:bg-neutral-200/80 text-neutral-600 hover:text-neutral-900 rounded-full border border-neutral-200/80 hover:border-neutral-300 transition-all duration-200"
                   >
                     {suggestion.label}
                   </button>
@@ -979,15 +979,15 @@ export default function ChatPage() {
             {isRecording && (
               <div className="flex items-center justify-center gap-3 py-2 px-4 bg-red-500/10 border border-red-500/30 rounded-xl animate-pulse">
                 <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse" />
-                <span className="text-sm text-red-400">Recording... Click mic to stop</span>
+                <span className="text-sm text-red-500">Recording... Click mic to stop</span>
               </div>
             )}
 
             {/* Transcribing Indicator */}
             {isTranscribing && (
               <div className="flex items-center justify-center gap-3 py-2 px-4 bg-violet-500/10 border border-violet-500/30 rounded-xl">
-                <div className="w-4 h-4 border-2 border-violet-400/30 border-t-violet-400 rounded-full animate-spin" />
-                <span className="text-sm text-violet-400">Transcribing audio...</span>
+                <div className="w-4 h-4 border-2 border-violet-400/30 border-t-violet-500 rounded-full animate-spin" />
+                <span className="text-sm text-violet-600">Transcribing audio...</span>
               </div>
             )}
 
@@ -997,7 +997,7 @@ export default function ChatPage() {
                 <img
                   src={imagePreview}
                   alt="Selected"
-                  className="max-h-32 rounded-lg border border-zinc-700"
+                  className="max-h-32 rounded-lg border border-neutral-300"
                 />
                 <button
                   type="button"
@@ -1037,7 +1037,7 @@ export default function ChatPage() {
                             type="button"
                             size="icon"
                             variant="ghost"
-                            className="h-10 w-10 rounded-full flex-shrink-0 text-zinc-400 hover:text-white hover:bg-zinc-800"
+                            className="h-10 w-10 rounded-full flex-shrink-0 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
                           >
                             <Plus className="w-5 h-5" />
                           </Button>
@@ -1050,7 +1050,7 @@ export default function ChatPage() {
                     <PopoverContent
                       side="top"
                       align="start"
-                      className="w-72 p-2 bg-zinc-900 border-zinc-800"
+                      className="w-72 p-2 bg-white border-neutral-200"
                     >
                       <div className="grid grid-cols-2 gap-1">
                         {quickTools.map((tool, idx) => {
@@ -1060,10 +1060,10 @@ export default function ChatPage() {
                               key={idx}
                               type="button"
                               onClick={() => handleToolSelect(tool.prompt)}
-                              className="flex items-center gap-2 p-2 rounded-lg hover:bg-zinc-800 transition-colors text-left"
+                              className="flex items-center gap-2 p-2 rounded-lg hover:bg-neutral-100 transition-colors text-left"
                             >
                               <Icon className={`w-4 h-4 ${tool.color}`} />
-                              <span className="text-sm text-zinc-300">{tool.label}</span>
+                              <span className="text-sm text-neutral-600">{tool.label}</span>
                             </button>
                           );
                         })}
@@ -1082,7 +1082,7 @@ export default function ChatPage() {
                     placeholder="Ask me anything..."
                     rows={1}
                     disabled={isSending || isRecording || isTranscribing}
-                    className="w-full min-h-[48px] max-h-[150px] resize-none bg-zinc-900 border border-zinc-800 rounded-2xl pl-4 pr-12 py-3 text-white placeholder:text-zinc-500 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200"
+                    className="w-full min-h-[48px] max-h-[150px] resize-none bg-neutral-50 border border-neutral-200 rounded-2xl pl-4 pr-12 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:border-violet-500/50 focus:ring-2 focus:ring-violet-500/20 transition-all duration-200"
                   />
 
                   {/* Clear Button (when there's text) */}
@@ -1090,7 +1090,7 @@ export default function ChatPage() {
                     <button
                       type="button"
                       onClick={() => setInputMessage("")}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-zinc-500 hover:text-zinc-300 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-neutral-400 hover:text-neutral-600 transition-colors"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -1109,8 +1109,8 @@ export default function ChatPage() {
                         disabled={isSending || isRecording || isTranscribing}
                         className={`h-10 w-10 rounded-full flex-shrink-0 transition-all ${
                           selectedImage
-                            ? "bg-violet-500/20 text-violet-400 hover:bg-violet-500/30"
-                            : "text-zinc-400 hover:text-white hover:bg-zinc-800"
+                            ? "bg-violet-500/20 text-violet-600 hover:bg-violet-500/30"
+                            : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
                         }`}
                       >
                         <Paperclip className="w-5 h-5" />
@@ -1134,8 +1134,8 @@ export default function ChatPage() {
                         disabled={isSending || isTranscribing}
                         className={`h-10 w-10 rounded-full flex-shrink-0 transition-all ${
                           isRecording
-                            ? "bg-red-500/20 text-red-400 hover:bg-red-500/30"
-                            : "text-zinc-400 hover:text-white hover:bg-zinc-800"
+                            ? "bg-red-500/20 text-red-500 hover:bg-red-500/30"
+                            : "text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
                         }`}
                       >
                         {isRecording ? (
@@ -1158,8 +1158,8 @@ export default function ChatPage() {
                   disabled={isSending || (!inputMessage.trim() && !selectedImage) || isRecording || isTranscribing}
                   className={`h-12 w-12 rounded-full flex-shrink-0 transition-all ${
                     (inputMessage.trim() || selectedImage) && !isSending
-                      ? "bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
-                      : "bg-zinc-800 text-zinc-500"
+                      ? "bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
+                      : "bg-neutral-100 text-neutral-400"
                   }`}
                 >
                   {isSending ? (
@@ -1170,15 +1170,15 @@ export default function ChatPage() {
                 </Button>
               </div>
 
-              <div className="flex items-center justify-center gap-3 text-[10px] text-zinc-600 mt-2">
+              <div className="flex items-center justify-center gap-3 text-[10px] text-neutral-400 mt-2">
                 <span>D23 AI can make mistakes. Verify important information.</span>
-                <span className="text-zinc-700">|</span>
+                <span className="text-neutral-300">|</span>
                 <span className="hidden sm:inline">
-                  <kbd className="px-1 py-0.5 bg-zinc-800/50 rounded text-zinc-500">Enter</kbd> send
+                  <kbd className="px-1 py-0.5 bg-neutral-100/80 rounded text-neutral-400">Enter</kbd> send
                   <span className="mx-1">·</span>
-                  <kbd className="px-1 py-0.5 bg-zinc-800/50 rounded text-zinc-500">Shift+Enter</kbd> new line
+                  <kbd className="px-1 py-0.5 bg-neutral-100/80 rounded text-neutral-400">Shift+Enter</kbd> new line
                   <span className="mx-1">·</span>
-                  <kbd className="px-1 py-0.5 bg-zinc-800/50 rounded text-zinc-500">Esc</kbd> clear
+                  <kbd className="px-1 py-0.5 bg-neutral-100/80 rounded text-neutral-400">Esc</kbd> clear
                 </span>
               </div>
             </form>

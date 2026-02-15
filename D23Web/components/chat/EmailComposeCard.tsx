@@ -149,14 +149,14 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
 
   if (sent) {
     return (
-      <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 max-w-md">
+      <div className="rounded-xl border border-emerald-500/30 bg-emerald-50 p-4 max-w-md">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-full bg-emerald-500/20">
-            <Check className="h-5 w-5 text-emerald-400" />
+          <div className="p-2 rounded-full bg-emerald-100">
+            <Check className="h-5 w-5 text-emerald-600" />
           </div>
           <div>
-            <p className="font-medium text-emerald-400">Email Sent!</p>
-            <p className="text-sm text-zinc-400">Your email has been sent to {emailData.to}</p>
+            <p className="font-medium text-emerald-700">Email Sent!</p>
+            <p className="text-sm text-neutral-500">Your email has been sent to {emailData.to}</p>
           </div>
         </div>
       </div>
@@ -165,14 +165,14 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
 
   if (scheduled) {
     return (
-      <div className="rounded-xl border border-blue-500/30 bg-blue-500/10 p-4 max-w-md">
+      <div className="rounded-xl border border-blue-500/30 bg-blue-50 p-4 max-w-md">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-full bg-blue-500/20">
-            <Clock className="h-5 w-5 text-blue-400" />
+          <div className="p-2 rounded-full bg-blue-100">
+            <Clock className="h-5 w-5 text-blue-600" />
           </div>
           <div>
-            <p className="font-medium text-blue-400">Email Scheduled!</p>
-            <p className="text-sm text-zinc-400">
+            <p className="font-medium text-blue-700">Email Scheduled!</p>
+            <p className="text-sm text-neutral-500">
               Your email to {emailData.to} will be sent on {scheduledTime}
             </p>
           </div>
@@ -182,21 +182,21 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
   }
 
   return (
-    <div className="rounded-xl border border-zinc-700 bg-zinc-900/80 backdrop-blur-sm p-4 max-w-lg w-full">
+    <div className="rounded-xl border border-neutral-200 bg-white backdrop-blur-sm p-4 max-w-lg w-full shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-violet-500/20">
-            <Mail className="h-4 w-4 text-violet-400" />
+          <div className="p-2 rounded-lg bg-violet-100">
+            <Mail className="h-4 w-4 text-violet-600" />
           </div>
-          <span className="font-medium text-white">Compose Email</span>
+          <span className="font-medium text-neutral-900">Compose Email</span>
         </div>
         {onCancel && (
           <Button
             variant="ghost"
             size="icon"
             onClick={onCancel}
-            className="h-8 w-8 text-zinc-400 hover:text-white"
+            className="h-8 w-8 text-neutral-500 hover:text-neutral-900"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -207,13 +207,13 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
       <div className="space-y-3">
         {/* To */}
         <div className="space-y-1">
-          <Label className="text-xs text-zinc-400">To</Label>
+          <Label className="text-xs text-neutral-500">To</Label>
           <Input
             type="email"
             value={emailData.to}
             onChange={(e) => setEmailData({ ...emailData, to: e.target.value })}
             placeholder="recipient@example.com"
-            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500"
+            className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500"
           />
         </div>
 
@@ -221,7 +221,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
         {!showCcBcc && (
           <button
             onClick={() => setShowCcBcc(true)}
-            className="text-xs text-violet-400 hover:text-violet-300"
+            className="text-xs text-violet-600 hover:text-violet-500"
           >
             + Add CC/BCC
           </button>
@@ -231,23 +231,23 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
         {showCcBcc && (
           <>
             <div className="space-y-1">
-              <Label className="text-xs text-zinc-400">CC</Label>
+              <Label className="text-xs text-neutral-500">CC</Label>
               <Input
                 type="email"
                 value={emailData.cc || ""}
                 onChange={(e) => setEmailData({ ...emailData, cc: e.target.value })}
                 placeholder="cc@example.com"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500"
+                className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500"
               />
             </div>
             <div className="space-y-1">
-              <Label className="text-xs text-zinc-400">BCC</Label>
+              <Label className="text-xs text-neutral-500">BCC</Label>
               <Input
                 type="email"
                 value={emailData.bcc || ""}
                 onChange={(e) => setEmailData({ ...emailData, bcc: e.target.value })}
                 placeholder="bcc@example.com"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500"
+                className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500"
               />
             </div>
           </>
@@ -255,33 +255,33 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
 
         {/* Subject */}
         <div className="space-y-1">
-          <Label className="text-xs text-zinc-400">Subject</Label>
+          <Label className="text-xs text-neutral-500">Subject</Label>
           <Input
             value={emailData.subject}
             onChange={(e) => setEmailData({ ...emailData, subject: e.target.value })}
             placeholder="Email subject"
-            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500"
+            className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500"
           />
         </div>
 
         {/* Body */}
         <div className="space-y-1">
-          <Label className="text-xs text-zinc-400">Message</Label>
+          <Label className="text-xs text-neutral-500">Message</Label>
           <Textarea
             value={emailData.body}
             onChange={(e) => setEmailData({ ...emailData, body: e.target.value })}
             placeholder="Type your message here..."
             rows={6}
-            className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500 resize-none"
+            className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500 resize-none"
           />
         </div>
 
         {/* Schedule Toggle */}
         {onSchedule && (
-          <div className="flex items-center justify-between py-2 border-t border-zinc-800">
+          <div className="flex items-center justify-between py-2 border-t border-neutral-200">
             <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4 text-zinc-400" />
-              <span className="text-sm text-zinc-300">Schedule for later</span>
+              <Clock className="h-4 w-4 text-neutral-500" />
+              <span className="text-sm text-neutral-600">Schedule for later</span>
             </div>
             <Switch
               checked={scheduleMode}
@@ -293,10 +293,10 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
 
         {/* Schedule Date/Time Picker */}
         {scheduleMode && (
-          <div className="space-y-3 p-3 rounded-lg bg-zinc-800/50 border border-zinc-700">
+          <div className="space-y-3 p-3 rounded-lg bg-neutral-50 border border-neutral-200">
             {/* Quick Presets */}
             <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm text-zinc-400">
+              <div className="flex items-center gap-2 text-sm text-neutral-500">
                 <Clock className="h-4 w-4" />
                 <span>Quick schedule</span>
               </div>
@@ -308,7 +308,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
                     className={`px-3 py-1.5 text-xs rounded-lg border transition-all ${
                       selectedPreset === index && !useCustomTime
                         ? "bg-violet-600 border-violet-500 text-white"
-                        : "bg-zinc-900 border-zinc-700 text-zinc-300 hover:border-zinc-600 hover:bg-zinc-800"
+                        : "bg-white border-neutral-200 text-neutral-600 hover:border-neutral-300 hover:bg-neutral-100"
                     }`}
                   >
                     {preset.label}
@@ -322,7 +322,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
                   className={`px-3 py-1.5 text-xs rounded-lg border transition-all ${
                     useCustomTime
                       ? "bg-violet-600 border-violet-500 text-white"
-                      : "bg-zinc-900 border-zinc-700 text-zinc-300 hover:border-zinc-600 hover:bg-zinc-800"
+                      : "bg-white border-neutral-200 text-neutral-600 hover:border-neutral-300 hover:bg-neutral-100"
                   }`}
                 >
                   Custom
@@ -332,14 +332,14 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
 
             {/* Custom Date/Time (shown when custom is selected or preset chosen) */}
             {(useCustomTime || selectedPreset !== null) && (
-              <div className="space-y-2 pt-2 border-t border-zinc-700">
-                <div className="flex items-center gap-2 text-sm text-zinc-400">
+              <div className="space-y-2 pt-2 border-t border-neutral-200">
+                <div className="flex items-center gap-2 text-sm text-neutral-500">
                   <Calendar className="h-4 w-4" />
                   <span>{useCustomTime ? "Select date and time" : "Scheduled for"}</span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <div className="space-y-1">
-                    <Label className="text-xs text-zinc-400">Date</Label>
+                    <Label className="text-xs text-neutral-500">Date</Label>
                     <Input
                       type="date"
                       value={scheduleDate}
@@ -349,11 +349,11 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
                         setSelectedPreset(null);
                       }}
                       min={today}
-                      className="bg-zinc-900 border-zinc-700 text-white focus:border-violet-500"
+                      className="bg-white border-neutral-200 text-neutral-900 focus:border-violet-500"
                     />
                   </div>
                   <div className="space-y-1">
-                    <Label className="text-xs text-zinc-400">Time</Label>
+                    <Label className="text-xs text-neutral-500">Time</Label>
                     <Input
                       type="time"
                       value={scheduleTime}
@@ -362,7 +362,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
                         setUseCustomTime(true);
                         setSelectedPreset(null);
                       }}
-                      className="bg-zinc-900 border-zinc-700 text-white focus:border-violet-500"
+                      className="bg-white border-neutral-200 text-neutral-900 focus:border-violet-500"
                     />
                   </div>
                 </div>
@@ -373,7 +373,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
 
         {/* Error */}
         {error && (
-          <p className="text-sm text-red-400">{error}</p>
+          <p className="text-sm text-red-500">{error}</p>
         )}
 
         {/* Actions */}
@@ -383,7 +383,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
               variant="outline"
               onClick={onCancel}
               disabled={isSending}
-              className="border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+              className="border-neutral-200 bg-neutral-50 text-neutral-600 hover:bg-neutral-100"
             >
               Cancel
             </Button>
@@ -410,7 +410,7 @@ export function EmailComposeCard({ initialData, onSend, onSchedule, onCancel }: 
             <Button
               onClick={handleSend}
               disabled={isSending || !emailData.to || !emailData.subject}
-              className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white"
+              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white"
             >
               {isSending ? (
                 <>

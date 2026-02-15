@@ -54,14 +54,14 @@ export function ChatArea({
         <div className="max-w-2xl w-full text-center space-y-8">
           {/* Logo & Welcome */}
           <div className="space-y-4">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 shadow-lg shadow-violet-500/25">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-600 to-indigo-600 shadow-lg shadow-violet-500/25">
               <Sparkles className="h-8 w-8 text-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">
+              <h1 className="text-3xl font-bold text-neutral-900 mb-2">
                 How can I help you today?
               </h1>
-              <p className="text-zinc-400 text-sm">
+              <p className="text-neutral-500 text-sm">
                 Ask me about weather, news, train status, horoscopes, or anything else
               </p>
             </div>
@@ -74,7 +74,7 @@ export function ChatArea({
               return (
                 <button
                   key={i}
-                  className="group flex flex-col items-start gap-3 p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/50 transition-all text-left"
+                  className="group flex flex-col items-start gap-3 p-4 rounded-xl bg-neutral-50 border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-100 transition-all text-left"
                   onClick={() => {
                     onSuggestionSelect(suggestion.text);
                     inputRef.current?.focus();
@@ -83,7 +83,7 @@ export function ChatArea({
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br ${suggestion.color} shadow-lg`}>
                     <Icon className="h-5 w-5 text-white" />
                   </div>
-                  <span className="text-sm text-zinc-300 group-hover:text-white transition-colors leading-tight">
+                  <span className="text-sm text-neutral-600 group-hover:text-neutral-900 transition-colors leading-tight">
                     {suggestion.text}
                   </span>
                 </button>
@@ -113,7 +113,7 @@ export function ChatArea({
         <div className="max-w-3xl mx-auto px-4 py-6">
           {isFetchingMessages ? (
             <div className="flex justify-center py-8">
-              <Loader2 className="h-6 w-6 animate-spin text-violet-400" />
+              <Loader2 className="h-6 w-6 animate-spin text-violet-500" />
             </div>
           ) : (
             formattedMessages.map((msg, idx) => {
@@ -153,12 +153,12 @@ export function ChatArea({
           {currentAIMessage === "" && messages.length > 0 && messages[messages.length - 1]?.role === "user" && (
             <div className="flex gap-3 mb-4">
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-violet-400" />
+                <Sparkles className="w-4 h-4 text-violet-500" />
               </div>
               <div className="flex items-center gap-1 px-4 py-3 rounded-2xl bg-muted rounded-tl-sm">
-                <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                <span className="w-2 h-2 bg-zinc-400 rounded-full animate-bounce" />
+                <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                <span className="w-2 h-2 bg-neutral-400 rounded-full animate-bounce" />
               </div>
             </div>
           )}
@@ -173,7 +173,7 @@ export function ChatArea({
           <Button
             size="icon"
             onClick={onScrollToBottom}
-            className="rounded-full shadow-lg bg-zinc-800 hover:bg-zinc-700 border border-zinc-700"
+            className="rounded-full shadow-lg bg-neutral-100 hover:bg-neutral-200 border border-neutral-300 text-neutral-900"
           >
             <ArrowDown className="h-4 w-4" />
           </Button>

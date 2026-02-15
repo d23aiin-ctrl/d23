@@ -315,14 +315,14 @@ export default function SettingsPage() {
 
   if (loading || !currentUser) {
     return (
-      <div className="flex h-screen items-center justify-center bg-black">
+      <div className="flex h-screen items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 p-[2px] animate-spin">
-            <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-violet-400" />
+          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 p-[2px] animate-spin">
+            <div className="w-full h-full rounded-full bg-white flex items-center justify-center">
+              <Sparkles className="w-6 h-6 text-violet-600" />
             </div>
           </div>
-          <p className="text-zinc-400">Loading...</p>
+          <p className="text-neutral-500">Loading...</p>
         </div>
       </div>
     );
@@ -342,29 +342,29 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-white text-neutral-900">
       {/* Background gradients */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-600/10 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-violet-100/40 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-indigo-100/40 rounded-full blur-[120px]" />
       </div>
 
       {/* Header */}
-      <header className="relative z-10 border-b border-zinc-800 bg-black/50 backdrop-blur-xl">
+      <header className="relative z-10 border-b border-neutral-200 bg-white/80 backdrop-blur-xl">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-4">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => router.push("/chat")}
-            className="text-zinc-400 hover:text-white hover:bg-zinc-800"
+            className="text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
           >
             <ArrowLeft className="h-5 w-5" />
           </Button>
           <div>
-            <h1 className="text-xl font-semibold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
+            <h1 className="text-xl font-semibold bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 bg-clip-text text-transparent">
               Integrations
             </h1>
-            <p className="text-sm text-zinc-500">
+            <p className="text-sm text-neutral-400">
               Connect your tools and services
             </p>
           </div>
@@ -375,7 +375,7 @@ export default function SettingsPage() {
         {/* Active Integrations */}
         {configuredIntegrations.length > 0 && (
           <section className="mb-12">
-            <h2 className="text-lg font-semibold mb-4 text-zinc-200">Active Integrations</h2>
+            <h2 className="text-lg font-semibold mb-4 text-neutral-900">Active Integrations</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {configuredIntegrations.map((tool) => {
                 const template = mcpTemplates.find(
@@ -384,15 +384,15 @@ export default function SettingsPage() {
                 return (
                   <div
                     key={tool.id}
-                    className="relative rounded-xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm p-4 hover:border-violet-500/50 transition-all"
+                    className="relative rounded-xl border border-neutral-200 bg-white shadow-sm backdrop-blur-sm p-4 hover:border-violet-500/50 transition-all"
                   >
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 text-violet-400">
+                        <div className="p-2 rounded-lg bg-gradient-to-br from-violet-500/20 to-indigo-500/20 text-violet-600">
                           {template ? iconMap[template.icon] : <Settings className="h-5 w-5" />}
                         </div>
                         <div>
-                          <h3 className="font-medium text-white">{tool.name}</h3>
+                          <h3 className="font-medium text-neutral-900">{tool.name}</h3>
                           <p className="text-xs text-emerald-400">Connected</p>
                         </div>
                       </div>
@@ -403,7 +403,7 @@ export default function SettingsPage() {
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-zinc-500">
+                      <span className="text-xs text-neutral-400">
                         Added {new Date(tool.created_at).toLocaleDateString()}
                       </span>
                       <AlertDialog>
@@ -416,15 +416,15 @@ export default function SettingsPage() {
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent className="bg-zinc-900 border-zinc-800">
+                        <AlertDialogContent className="bg-white border-neutral-200">
                           <AlertDialogHeader>
-                            <AlertDialogTitle className="text-white">Remove integration?</AlertDialogTitle>
-                            <AlertDialogDescription className="text-zinc-400">
+                            <AlertDialogTitle className="text-neutral-900">Remove integration?</AlertDialogTitle>
+                            <AlertDialogDescription className="text-neutral-500">
                               This will disconnect {tool.name}. You can add it again later.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel className="bg-zinc-800 border-zinc-700 text-white hover:bg-zinc-700">
+                            <AlertDialogCancel className="bg-neutral-100 border-neutral-300 text-neutral-900 hover:bg-neutral-200">
                               Cancel
                             </AlertDialogCancel>
                             <AlertDialogAction
@@ -446,7 +446,7 @@ export default function SettingsPage() {
 
         {/* Available Integrations */}
         <section>
-          <h2 className="text-lg font-semibold mb-4 text-zinc-200">Available Integrations</h2>
+          <h2 className="text-lg font-semibold mb-4 text-neutral-900">Available Integrations</h2>
 
           {categories.map((category) => {
             const categoryTemplates = mcpTemplates.filter((t) => t.category === category);
@@ -454,7 +454,7 @@ export default function SettingsPage() {
 
             return (
               <div key={category} className="mb-8">
-                <h3 className="text-sm font-medium text-zinc-500 uppercase tracking-wider mb-3">
+                <h3 className="text-sm font-medium text-neutral-400 uppercase tracking-wider mb-3">
                   {category}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -467,7 +467,7 @@ export default function SettingsPage() {
                     return (
                       <div
                         key={template.id}
-                        className={`rounded-xl border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm p-4 transition-all ${
+                        className={`rounded-xl border border-neutral-200 bg-white shadow-sm backdrop-blur-sm p-4 transition-all ${
                           isComingSoon
                             ? "opacity-70 cursor-default"
                             : isConfigured && !isOAuth
@@ -478,24 +478,24 @@ export default function SettingsPage() {
                       >
                         <div className="flex items-start justify-between mb-3">
                           <div className="flex items-center gap-3">
-                            <div className={`p-2 rounded-lg ${isComingSoon ? "bg-zinc-800/50 text-zinc-500" : "bg-zinc-800 text-zinc-400"}`}>
+                            <div className={`p-2 rounded-lg ${isComingSoon ? "bg-neutral-100/50 text-neutral-400" : "bg-neutral-100 text-neutral-500"}`}>
                               {iconMap[template.icon]}
                             </div>
-                            <h3 className={`font-medium ${isComingSoon ? "text-zinc-400" : "text-white"}`}>{template.name}</h3>
+                            <h3 className={`font-medium ${isComingSoon ? "text-neutral-500" : "text-neutral-900"}`}>{template.name}</h3>
                           </div>
                           {isComingSoon ? (
                             <span className="text-xs text-amber-500 flex items-center gap-1 bg-amber-500/10 px-2 py-1 rounded-full">
                               <Clock className="h-3 w-3" /> Coming Soon
                             </span>
                           ) : isConfigured ? (
-                            <span className="text-xs text-violet-400 flex items-center gap-1">
+                            <span className="text-xs text-violet-600 flex items-center gap-1">
                               <Check className="h-3 w-3" /> Added
                             </span>
                           ) : (
-                            <Plus className="h-5 w-5 text-zinc-600" />
+                            <Plus className="h-5 w-5 text-neutral-400" />
                           )}
                         </div>
-                        <p className="text-sm text-zinc-500">
+                        <p className="text-sm text-neutral-500">
                           {template.description}
                         </p>
                       </div>
@@ -510,12 +510,12 @@ export default function SettingsPage() {
         {/* Scheduled Emails Section */}
         <section className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-zinc-200 flex items-center gap-2">
+            <h2 className="text-lg font-semibold text-neutral-900 flex items-center gap-2">
               <Clock className="h-5 w-5 text-blue-400" />
               Scheduled Emails
             </h2>
           </div>
-          <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-4">
+          <div className="rounded-xl border border-neutral-200 bg-white shadow-sm p-4">
             <ScheduledEmailsList accessToken={accessToken} />
           </div>
         </section>
@@ -523,19 +523,19 @@ export default function SettingsPage() {
 
       {/* Configuration Dialog */}
       <Dialog open={!!selectedTemplate} onOpenChange={() => setSelectedTemplate(null)}>
-        <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white">
+        <DialogContent className="sm:max-w-md bg-white border-neutral-200 text-neutral-900">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-3 text-white">
+            <DialogTitle className="flex items-center gap-3 text-neutral-900">
               {selectedTemplate && (
                 <>
-                  <div className="p-2 rounded-lg bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 text-violet-400">
+                  <div className="p-2 rounded-lg bg-gradient-to-br from-violet-500/20 to-indigo-500/20 text-violet-600">
                     {iconMap[selectedTemplate.icon]}
                   </div>
                   Connect {selectedTemplate.name}
                 </>
               )}
             </DialogTitle>
-            <DialogDescription className="text-zinc-400">
+            <DialogDescription className="text-neutral-500">
               {selectedTemplate?.description}
             </DialogDescription>
           </DialogHeader>
@@ -543,15 +543,15 @@ export default function SettingsPage() {
           {selectedTemplate && (
             <div className="space-y-4 py-4">
               {selectedTemplate.help && (
-                <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3 space-y-2">
+                <div className="rounded-lg border border-neutral-300 bg-neutral-50 px-4 py-3 space-y-2">
                   <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-medium text-zinc-200">How to connect</p>
+                    <p className="text-sm font-medium text-neutral-900">How to connect</p>
                     {selectedTemplate.help.ctaUrl && (
                       <Button
                         type="button"
                         variant="outline"
                         size="sm"
-                        className="border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white"
+                        className="border-neutral-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-900"
                         onClick={() =>
                           window.open(
                             selectedTemplate.help?.ctaUrl,
@@ -565,14 +565,14 @@ export default function SettingsPage() {
                     )}
                   </div>
                   {selectedTemplate.help.steps && (
-                    <ol className="list-decimal list-inside text-sm text-zinc-400 space-y-1">
+                    <ol className="list-decimal list-inside text-sm text-neutral-500 space-y-1">
                       {selectedTemplate.help.steps.map((step, idx) => (
                         <li key={idx}>{step}</li>
                       ))}
                     </ol>
                   )}
                   {selectedTemplate.help.note && (
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-neutral-400">
                       {selectedTemplate.help.note}
                     </p>
                   )}
@@ -581,9 +581,9 @@ export default function SettingsPage() {
 
               {isOAuthProvider(selectedTemplate.id) ? (
                 <div className="space-y-3">
-                  <div className="rounded-lg border border-zinc-700 bg-zinc-800/50 px-4 py-3">
-                    <p className="text-sm font-medium text-zinc-200">Connection status</p>
-                    <p className="text-sm text-zinc-400">
+                  <div className="rounded-lg border border-neutral-300 bg-neutral-50 px-4 py-3">
+                    <p className="text-sm font-medium text-neutral-900">Connection status</p>
+                    <p className="text-sm text-neutral-500">
                       {loadingProviders[selectedTemplate.id]
                         ? `Checking ${selectedTemplate.name} connection...`
                         : providerStatuses[selectedTemplate.id]?.connected
@@ -591,7 +591,7 @@ export default function SettingsPage() {
                         : `${selectedTemplate.name} is not connected yet.`}
                     </p>
                   </div>
-                  <p className="text-xs text-zinc-500">
+                  <p className="text-xs text-neutral-400">
                     We use your current Firebase session to start the OAuth flow and
                     store the tokens securely for your user.
                   </p>
@@ -599,7 +599,7 @@ export default function SettingsPage() {
               ) : (
                 selectedTemplate.config.fields.map((field) => (
                   <div key={field.name} className="space-y-2">
-                    <Label htmlFor={field.name} className="text-zinc-300">
+                    <Label htmlFor={field.name} className="text-neutral-600">
                       {field.label}
                       {field.required && <span className="text-red-400 ml-1">*</span>}
                     </Label>
@@ -611,7 +611,7 @@ export default function SettingsPage() {
                         onChange={(e) =>
                           setConfigValues((prev) => ({ ...prev, [field.name]: e.target.value }))
                         }
-                        className="min-h-[100px] font-mono text-sm bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500 focus:ring-violet-500/20"
+                        className="min-h-[100px] font-mono text-sm bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500 focus:ring-violet-500/20"
                       />
                     ) : (
                       <Input
@@ -622,11 +622,11 @@ export default function SettingsPage() {
                         onChange={(e) =>
                           setConfigValues((prev) => ({ ...prev, [field.name]: e.target.value }))
                         }
-                        className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 focus:border-violet-500 focus:ring-violet-500/20"
+                        className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 focus:border-violet-500 focus:ring-violet-500/20"
                       />
                     )}
                     {field.helper && (
-                      <p className="text-xs text-zinc-500">{field.helper}</p>
+                      <p className="text-xs text-neutral-400">{field.helper}</p>
                     )}
                   </div>
                 ))
@@ -638,7 +638,7 @@ export default function SettingsPage() {
             <Button
               variant="outline"
               onClick={() => setSelectedTemplate(null)}
-              className="border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-white"
+              className="border-neutral-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200 hover:text-neutral-900"
             >
               Cancel
             </Button>
@@ -656,17 +656,17 @@ export default function SettingsPage() {
                         Disconnect
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent className="bg-zinc-900 border-zinc-800">
+                    <AlertDialogContent className="bg-white border-neutral-200">
                       <AlertDialogHeader>
-                        <AlertDialogTitle className="text-white">
+                        <AlertDialogTitle className="text-neutral-900">
                           Disconnect {selectedTemplate.name}?
                         </AlertDialogTitle>
-                        <AlertDialogDescription className="text-zinc-400">
+                        <AlertDialogDescription className="text-neutral-500">
                           This will remove your {selectedTemplate.name} connection. You can reconnect anytime.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
-                        <AlertDialogCancel className="bg-zinc-800 border-zinc-700 text-white hover:bg-zinc-700">
+                        <AlertDialogCancel className="bg-neutral-100 border-neutral-300 text-neutral-900 hover:bg-neutral-200">
                           Cancel
                         </AlertDialogCancel>
                         <AlertDialogAction
@@ -682,7 +682,7 @@ export default function SettingsPage() {
                 <Button
                   onClick={() => handleStartOAuthConnect(selectedTemplate.id)}
                   disabled={isSaving || loadingProviders[selectedTemplate.id]}
-                  className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white"
+                  className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white"
                 >
                   {isSaving ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
                   {providerStatuses[selectedTemplate.id]?.connected
@@ -700,7 +700,7 @@ export default function SettingsPage() {
                 <Button
                   onClick={handleSaveIntegration}
                   disabled={!canSave}
-                  className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white disabled:opacity-50"
+                  className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white disabled:opacity-50"
                 >
                   {isSaving ? (
                     <Loader2 className="h-4 w-4 animate-spin mr-2" />

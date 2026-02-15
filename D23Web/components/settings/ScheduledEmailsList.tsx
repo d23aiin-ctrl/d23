@@ -238,7 +238,7 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-zinc-500/20 text-zinc-400 border border-zinc-500/30">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs bg-neutral-500/20 text-neutral-400 border border-neutral-500/30">
             {status}
           </span>
         );
@@ -260,27 +260,27 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
     <div className="space-y-4">
       {/* Status Filter */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-neutral-500">
           {emails.length} email{emails.length !== 1 ? "s" : ""}
         </p>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[140px] bg-zinc-800 border-zinc-700 text-white">
+          <SelectTrigger className="w-[140px] bg-neutral-50 border-neutral-200 text-neutral-900">
             <SelectValue placeholder="Filter status" />
           </SelectTrigger>
-          <SelectContent className="bg-zinc-800 border-zinc-700">
-            <SelectItem value="all" className="text-white hover:bg-zinc-700">All Status</SelectItem>
-            <SelectItem value="active" className="text-white hover:bg-zinc-700">Scheduled</SelectItem>
-            <SelectItem value="completed" className="text-white hover:bg-zinc-700">Sent</SelectItem>
-            <SelectItem value="cancelled" className="text-white hover:bg-zinc-700">Cancelled</SelectItem>
+          <SelectContent className="bg-white border-neutral-200">
+            <SelectItem value="all" className="text-neutral-900 hover:bg-neutral-100">All Status</SelectItem>
+            <SelectItem value="active" className="text-neutral-900 hover:bg-neutral-100">Scheduled</SelectItem>
+            <SelectItem value="completed" className="text-neutral-900 hover:bg-neutral-100">Sent</SelectItem>
+            <SelectItem value="cancelled" className="text-neutral-900 hover:bg-neutral-100">Cancelled</SelectItem>
           </SelectContent>
         </Select>
       </div>
 
       {emails.length === 0 ? (
         <div className="text-center py-8">
-          <Mail className="h-12 w-12 text-zinc-600 mx-auto mb-3" />
-          <p className="text-zinc-400">No scheduled emails</p>
-          <p className="text-sm text-zinc-500 mt-1">
+          <Mail className="h-12 w-12 text-neutral-300 mx-auto mb-3" />
+          <p className="text-neutral-500">No scheduled emails</p>
+          <p className="text-sm text-neutral-400 mt-1">
             Schedule an email from the chat to see it here
           </p>
         </div>
@@ -289,18 +289,18 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
           {emails.map((email) => (
             <div
               key={email.id}
-              className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-4 hover:border-zinc-700 transition-colors"
+              className="rounded-lg border border-neutral-200 bg-white p-4 hover:border-neutral-300 transition-colors"
             >
               <div className="flex items-start justify-between gap-4">
                 {/* Email Info */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1 flex-wrap">
-                    <Mail className="h-4 w-4 text-violet-400 flex-shrink-0" />
-                    <span className="font-medium text-white truncate">{email.to}</span>
+                    <Mail className="h-4 w-4 text-violet-600 flex-shrink-0" />
+                    <span className="font-medium text-neutral-900 truncate">{email.to}</span>
                     {getStatusBadge(email.status)}
                   </div>
-                  <p className="text-sm text-zinc-300 truncate mb-2">{email.subject}</p>
-                  <div className="flex items-center gap-4 text-xs text-zinc-500 flex-wrap">
+                  <p className="text-sm text-neutral-600 truncate mb-2">{email.subject}</p>
+                  <div className="flex items-center gap-4 text-xs text-neutral-400 flex-wrap">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       <span>{formatDateTime(email.scheduled_at)}</span>
@@ -327,7 +327,7 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
                       variant="ghost"
                       size="icon"
                       onClick={() => openEditDialog(email)}
-                      className="h-8 w-8 text-zinc-400 hover:text-white hover:bg-zinc-800"
+                      className="h-8 w-8 text-neutral-500 hover:text-neutral-900 hover:bg-neutral-100"
                     >
                       <Edit2 className="h-4 w-4" />
                     </Button>
@@ -341,15 +341,15 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
                           <Trash2 className="h-4 w-4" />
                         </Button>
                       </AlertDialogTrigger>
-                      <AlertDialogContent className="bg-zinc-900 border-zinc-800">
+                      <AlertDialogContent className="bg-white border-neutral-200">
                         <AlertDialogHeader>
-                          <AlertDialogTitle className="text-white">Cancel Scheduled Email?</AlertDialogTitle>
-                          <AlertDialogDescription className="text-zinc-400">
+                          <AlertDialogTitle className="text-neutral-900">Cancel Scheduled Email?</AlertDialogTitle>
+                          <AlertDialogDescription className="text-neutral-500">
                             This will cancel the scheduled email to {email.to}. This action cannot be undone.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel className="bg-zinc-800 border-zinc-700 text-white hover:bg-zinc-700">
+                          <AlertDialogCancel className="bg-neutral-100 border-neutral-300 text-neutral-900 hover:bg-neutral-200">
                             Keep Email
                           </AlertDialogCancel>
                           <AlertDialogAction
@@ -375,10 +375,10 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
 
       {/* Edit Dialog */}
       <Dialog open={!!editingEmail} onOpenChange={() => setEditingEmail(null)}>
-        <DialogContent className="sm:max-w-md bg-zinc-900 border-zinc-800 text-white">
+        <DialogContent className="sm:max-w-md bg-white border-neutral-200 text-neutral-900">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-white">
-              <Edit2 className="h-5 w-5 text-violet-400" />
+            <DialogTitle className="flex items-center gap-2 text-neutral-900">
+              <Edit2 className="h-5 w-5 text-violet-600" />
               Edit Scheduled Email
             </DialogTitle>
           </DialogHeader>
@@ -386,58 +386,58 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
           <div className="space-y-4 py-4">
             {/* To */}
             <div className="space-y-2">
-              <Label className="text-zinc-300">To</Label>
+              <Label className="text-neutral-600">To</Label>
               <Input
                 type="email"
                 value={editForm.to}
                 onChange={(e) => setEditForm({ ...editForm, to: e.target.value })}
                 placeholder="recipient@example.com"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
+                className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400"
               />
             </div>
 
             {/* Subject */}
             <div className="space-y-2">
-              <Label className="text-zinc-300">Subject</Label>
+              <Label className="text-neutral-600">Subject</Label>
               <Input
                 value={editForm.subject}
                 onChange={(e) => setEditForm({ ...editForm, subject: e.target.value })}
                 placeholder="Email subject"
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500"
+                className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400"
               />
             </div>
 
             {/* Body */}
             <div className="space-y-2">
-              <Label className="text-zinc-300">Message</Label>
+              <Label className="text-neutral-600">Message</Label>
               <Textarea
                 value={editForm.body}
                 onChange={(e) => setEditForm({ ...editForm, body: e.target.value })}
                 placeholder="Type your message..."
                 rows={4}
-                className="bg-zinc-800 border-zinc-700 text-white placeholder:text-zinc-500 resize-none"
+                className="bg-neutral-50 border-neutral-200 text-neutral-900 placeholder:text-neutral-400 resize-none"
               />
             </div>
 
             {/* Date/Time */}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-2">
-                <Label className="text-zinc-300">Date</Label>
+                <Label className="text-neutral-600">Date</Label>
                 <Input
                   type="date"
                   value={editForm.scheduled_date}
                   onChange={(e) => setEditForm({ ...editForm, scheduled_date: e.target.value })}
                   min={today}
-                  className="bg-zinc-800 border-zinc-700 text-white"
+                  className="bg-neutral-50 border-neutral-200 text-neutral-900"
                 />
               </div>
               <div className="space-y-2">
-                <Label className="text-zinc-300">Time</Label>
+                <Label className="text-neutral-600">Time</Label>
                 <Input
                   type="time"
                   value={editForm.scheduled_time}
                   onChange={(e) => setEditForm({ ...editForm, scheduled_time: e.target.value })}
-                  className="bg-zinc-800 border-zinc-700 text-white"
+                  className="bg-neutral-50 border-neutral-200 text-neutral-900"
                 />
               </div>
             </div>
@@ -452,14 +452,14 @@ export function ScheduledEmailsList({ accessToken }: ScheduledEmailsListProps) {
               variant="outline"
               onClick={() => setEditingEmail(null)}
               disabled={isSaving}
-              className="border-zinc-700 bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
+              className="border-neutral-300 bg-neutral-100 text-neutral-600 hover:bg-neutral-200"
             >
               Cancel
             </Button>
             <Button
               onClick={handleSaveEdit}
               disabled={isSaving || !editForm.to || !editForm.subject}
-              className="bg-gradient-to-r from-violet-600 to-fuchsia-600 hover:from-violet-500 hover:to-fuchsia-500 text-white"
+              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 text-white"
             >
               {isSaving ? (
                 <>

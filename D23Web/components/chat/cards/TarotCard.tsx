@@ -93,16 +93,16 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
   // Handle multi-card spread
   if (isSpread(data)) {
     return (
-      <Card className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-zinc-800 overflow-hidden">
-        <CardHeader className="pb-3 bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-b border-zinc-800">
+      <Card className="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+        <CardHeader className="pb-3 bg-gradient-to-r from-violet-500/10 to-purple-500/10 border-b border-neutral-200">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center">
                 <Sparkles className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Tarot Reading</h3>
-                <p className="text-sm text-zinc-400 capitalize">
+                <h3 className="text-lg font-bold text-neutral-900">Tarot Reading</h3>
+                <p className="text-sm text-neutral-500 capitalize">
                   {data.spread_type?.replace('_', ' ') || 'Three Card Spread'}
                 </p>
               </div>
@@ -113,9 +113,9 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
         <CardContent className="pt-4 space-y-4">
           {/* Question if provided */}
           {(data.question || topic) && (
-            <div className="flex items-center gap-2 text-sm text-zinc-400">
+            <div className="flex items-center gap-2 text-sm text-neutral-500">
               <HelpCircle className="h-4 w-4" />
-              <span>Reading for: <span className="text-white">{data.question || topic}</span></span>
+              <span>Reading for: <span className="text-neutral-900">{data.question || topic}</span></span>
             </div>
           )}
 
@@ -123,23 +123,23 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
           <div className="grid grid-cols-3 gap-3">
             {data.cards.map((card, idx) => {
               const posLower = (card.position || "unknown").toLowerCase();
-              const gradient = positionColors[posLower] || "from-zinc-500/20 to-zinc-400/10";
+              const gradient = positionColors[posLower] || "from-neutral-100 to-neutral-50";
 
               return (
                 <div
                   key={idx}
-                  className={`p-3 rounded-lg bg-gradient-to-br ${gradient} border border-zinc-700/50`}
+                  className={`p-3 rounded-lg bg-gradient-to-br ${gradient} border border-neutral-200`}
                 >
                   <div className="text-center">
-                    <p className="text-xs text-zinc-500 mb-1">{card.position}</p>
-                    <p className="text-sm font-bold text-white mb-1">{card.card}</p>
+                    <p className="text-xs text-neutral-400 mb-1">{card.position}</p>
+                    <p className="text-sm font-bold text-neutral-900 mb-1">{card.card}</p>
                     {card.reversed && (
                       <Badge variant="outline" className="text-xs bg-purple-500/20 text-purple-400 border-purple-500/30 mb-1">
                         <RotateCcw className="h-3 w-3 mr-1" />
                         Reversed
                       </Badge>
                     )}
-                    <p className="text-xs text-zinc-400 mt-1">{card.meaning}</p>
+                    <p className="text-xs text-neutral-500 mt-1">{card.meaning}</p>
                   </div>
                 </div>
               );
@@ -150,9 +150,9 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
           <div className="p-3 rounded-lg bg-violet-500/10 border border-violet-500/20">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="h-4 w-4 text-violet-400" />
-              <span className="text-sm font-medium text-violet-300">Interpretation</span>
+              <span className="text-sm font-medium text-violet-600">Interpretation</span>
             </div>
-            <p className="text-sm text-zinc-300 leading-relaxed">{data.interpretation}</p>
+            <p className="text-sm text-neutral-600 leading-relaxed">{data.interpretation}</p>
           </div>
         </CardContent>
       </Card>
@@ -171,15 +171,15 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
   const icon = singleCard.suit ? suitIcons[suitLower] : <Sparkles className="h-5 w-5 text-violet-400" />;
 
   return (
-    <Card className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-zinc-800 overflow-hidden">
-      <CardHeader className={`pb-3 bg-gradient-to-r ${gradient} border-b border-zinc-800`}>
+    <Card className="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+      <CardHeader className={`pb-3 bg-gradient-to-r ${gradient} border-b border-neutral-200`}>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center">
               {icon}
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white">{singleCard.card_name}</h3>
+              <h3 className="text-lg font-bold text-neutral-900">{singleCard.card_name}</h3>
               <div className="flex items-center gap-2 mt-1">
                 <Badge
                   variant="outline"
@@ -191,7 +191,7 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
                   {singleCard.position === "upright" ? "↑ Upright" : "↓ Reversed"}
                 </Badge>
                 {singleCard.card_type === "major" && (
-                  <Badge variant="outline" className="bg-violet-500/20 text-violet-300 border-violet-500/30">
+                  <Badge variant="outline" className="bg-violet-500/20 text-violet-600 border-violet-500/30">
                     Major Arcana
                   </Badge>
                 )}
@@ -203,21 +203,21 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
 
       <CardContent className="pt-4 space-y-4">
         {topic && (
-          <div className="flex items-center gap-2 text-sm text-zinc-400">
+          <div className="flex items-center gap-2 text-sm text-neutral-500">
             <HelpCircle className="h-4 w-4" />
-            <span>Reading for: <span className="text-white">{topic}</span></span>
+            <span>Reading for: <span className="text-neutral-900">{topic}</span></span>
           </div>
         )}
 
         {/* Card Meaning */}
-        <div className="p-3 rounded-lg bg-zinc-800/30 border border-zinc-700/50">
+        <div className="p-3 rounded-lg bg-neutral-50 border border-neutral-200">
           <div className="flex items-center gap-2 mb-2">
             <Star className="h-4 w-4 text-yellow-400" />
-            <span className="text-sm font-medium text-zinc-300">
+            <span className="text-sm font-medium text-neutral-600">
               {singleCard.position === "upright" ? "Upright Meaning" : "Reversed Meaning"}
             </span>
           </div>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-neutral-500">
             {singleCard.position === "upright" ? singleCard.meaning_upright : singleCard.meaning_reversed}
           </p>
         </div>
@@ -227,20 +227,20 @@ export function TarotCard({ data: rawData, topic }: TarotCardProps) {
           <div className="p-3 rounded-lg bg-violet-500/10 border border-violet-500/20">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="h-4 w-4 text-violet-400" />
-              <span className="text-sm font-medium text-violet-300">Your Interpretation</span>
+              <span className="text-sm font-medium text-violet-600">Your Interpretation</span>
             </div>
-            <p className="text-sm text-zinc-300 leading-relaxed">{singleCard.interpretation}</p>
+            <p className="text-sm text-neutral-600 leading-relaxed">{singleCard.interpretation}</p>
           </div>
         )}
 
         {/* Advice */}
         {singleCard.advice && (
-          <div className="pt-3 border-t border-zinc-800">
+          <div className="pt-3 border-t border-neutral-200">
             <div className="flex items-start gap-2">
               <Sun className="h-4 w-4 text-yellow-400 mt-0.5" />
               <div>
-                <span className="text-sm font-medium text-zinc-300">Advice: </span>
-                <span className="text-sm text-zinc-400">{singleCard.advice}</span>
+                <span className="text-sm font-medium text-neutral-600">Advice: </span>
+                <span className="text-sm text-neutral-500">{singleCard.advice}</span>
               </div>
             </div>
           </div>

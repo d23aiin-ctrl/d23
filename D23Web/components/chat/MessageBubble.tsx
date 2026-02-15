@@ -201,8 +201,8 @@ export function MessageBubble({
             className={cn(
               "rounded-2xl px-4 py-2.5 text-sm leading-relaxed",
               isUser
-                ? "bg-primary text-primary-foreground rounded-tr-sm"
-                : "bg-muted text-foreground rounded-tl-sm"
+                ? "bg-violet-600 text-white rounded-tr-sm"
+                : "bg-neutral-50 border border-neutral-200 text-neutral-900 rounded-tl-sm"
             )}
           >
             {/* Render message with line breaks and code highlighting */}
@@ -237,7 +237,7 @@ export function MessageBubble({
 
         {/* Fallback for completely empty messages */}
         {!richCard && !message.content?.trim() && !isUser && (
-          <div className="rounded-2xl px-4 py-2.5 text-sm leading-relaxed bg-muted text-muted-foreground rounded-tl-sm">
+          <div className="rounded-2xl px-4 py-2.5 text-sm leading-relaxed bg-neutral-50 border border-neutral-200 text-neutral-500 rounded-tl-sm">
             <span className="italic">Unable to process this request.</span>
           </div>
         )}
@@ -257,10 +257,10 @@ export function MessageBubble({
                   <TooltipTrigger asChild>
                     <button
                       onClick={handleCopy}
-                      className="p-1 rounded hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300 transition-colors"
+                      className="p-1 rounded hover:bg-neutral-100 text-neutral-400 hover:text-neutral-600 transition-colors"
                     >
                       {copied ? (
-                        <Check className="w-3.5 h-3.5 text-green-400" />
+                        <Check className="w-3.5 h-3.5 text-green-500" />
                       ) : (
                         <Copy className="w-3.5 h-3.5" />
                       )}
@@ -277,7 +277,7 @@ export function MessageBubble({
                     <TooltipTrigger asChild>
                       <button
                         onClick={onRegenerate}
-                        className="p-1 rounded hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300 transition-colors"
+                        className="p-1 rounded hover:bg-neutral-100 text-neutral-400 hover:text-neutral-600 transition-colors"
                       >
                         <RefreshCw className="w-3.5 h-3.5" />
                       </button>
@@ -289,7 +289,7 @@ export function MessageBubble({
                 )}
 
                 {/* Feedback buttons */}
-                <div className="flex items-center gap-0.5 ml-1 border-l border-zinc-800 pl-1">
+                <div className="flex items-center gap-0.5 ml-1 border-l border-neutral-200 pl-1">
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <button
@@ -297,8 +297,8 @@ export function MessageBubble({
                         className={cn(
                           "p-1 rounded transition-colors",
                           feedback === "up"
-                            ? "text-green-400 bg-green-400/10"
-                            : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800"
+                            ? "text-green-500 bg-green-500/10"
+                            : "text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100"
                         )}
                       >
                         <ThumbsUp className="w-3.5 h-3.5" />
@@ -316,8 +316,8 @@ export function MessageBubble({
                         className={cn(
                           "p-1 rounded transition-colors",
                           feedback === "down"
-                            ? "text-red-400 bg-red-400/10"
-                            : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800"
+                            ? "text-red-500 bg-red-500/10"
+                            : "text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100"
                         )}
                       >
                         <ThumbsDown className="w-3.5 h-3.5" />
@@ -411,7 +411,7 @@ function FormattedMessage({ content }: { content: string }) {
             part.type === "inline-code" ? (
               <code
                 key={i}
-                className="px-1.5 py-0.5 rounded bg-zinc-800 text-violet-300 text-xs font-mono"
+                className="px-1.5 py-0.5 rounded bg-neutral-100 text-violet-600 text-xs font-mono"
               >
                 {part.content}
               </code>
@@ -434,13 +434,13 @@ function FormattedMessage({ content }: { content: string }) {
       {parts.map((part, i) => {
         if (part.type === "code-block") {
           return (
-            <div key={i} className="my-2 rounded-lg overflow-hidden bg-zinc-900 border border-zinc-800">
-              <div className="flex items-center justify-between px-3 py-1.5 bg-zinc-800/50 border-b border-zinc-800">
-                <span className="text-xs text-zinc-500 font-mono">{part.language}</span>
+            <div key={i} className="my-2 rounded-lg overflow-hidden bg-neutral-50 border border-neutral-200">
+              <div className="flex items-center justify-between px-3 py-1.5 bg-neutral-100/50 border-b border-neutral-200">
+                <span className="text-xs text-neutral-400 font-mono">{part.language}</span>
                 <CopyCodeButton code={part.content} />
               </div>
               <pre className="p-3 overflow-x-auto">
-                <code className="text-xs font-mono text-zinc-300 leading-relaxed">
+                <code className="text-xs font-mono text-neutral-600 leading-relaxed">
                   {part.content}
                 </code>
               </pre>
@@ -470,10 +470,10 @@ function CopyCodeButton({ code }: { code: string }) {
   return (
     <button
       onClick={handleCopy}
-      className="p-1 rounded hover:bg-zinc-700 text-zinc-500 hover:text-zinc-300 transition-colors"
+      className="p-1 rounded hover:bg-neutral-200 text-neutral-400 hover:text-neutral-600 transition-colors"
     >
       {copied ? (
-        <Check className="w-3 h-3 text-green-400" />
+        <Check className="w-3 h-3 text-green-500" />
       ) : (
         <Copy className="w-3 h-3" />
       )}
@@ -514,7 +514,7 @@ function renderTextWithLinks(content: string) {
             href={part.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline text-blue-400 hover:text-blue-300"
+            className="underline text-blue-600 hover:text-blue-500"
           >
             {part.url}
           </a>

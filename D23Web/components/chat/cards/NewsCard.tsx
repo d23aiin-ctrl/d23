@@ -58,14 +58,14 @@ export function NewsCard({ items: rawItems, category }: NewsCardProps) {
     return null;
   }
   return (
-    <Card className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-zinc-800 overflow-hidden">
-      <CardHeader className="pb-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-b border-zinc-800">
+    <Card className="bg-white rounded-xl border border-neutral-200 shadow-sm overflow-hidden">
+      <CardHeader className="pb-3 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border-b border-neutral-200">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-bold text-white flex items-center gap-2">
+          <CardTitle className="text-lg font-bold text-neutral-900 flex items-center gap-2">
             <Newspaper className="h-5 w-5 text-blue-400" />
             {category ? `${category} News` : "Latest News"}
           </CardTitle>
-          <Badge variant="outline" className="bg-zinc-800/50 text-zinc-300 border-zinc-700">
+          <Badge variant="outline" className="bg-neutral-50 text-neutral-600 border-neutral-300">
             {items.length} articles
           </Badge>
         </div>
@@ -75,12 +75,12 @@ export function NewsCard({ items: rawItems, category }: NewsCardProps) {
         {items.map((item, idx) => (
           <div
             key={idx}
-            className="p-3 rounded-lg bg-zinc-800/30 border border-zinc-700/50 hover:bg-zinc-800/50 transition-colors"
+            className="p-3 rounded-lg bg-neutral-50 border border-neutral-200 hover:bg-neutral-100 transition-colors"
           >
             <div className="flex gap-3">
               {/* Thumbnail */}
               {item.image_url && (
-                <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-zinc-800">
+                <div className="flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden bg-neutral-100">
                   <img
                     src={item.image_url}
                     alt=""
@@ -94,7 +94,7 @@ export function NewsCard({ items: rawItems, category }: NewsCardProps) {
 
               {/* Content */}
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-medium text-white line-clamp-2 mb-1">
+                <h4 className="text-sm font-medium text-neutral-900 line-clamp-2 mb-1">
                   {item.url ? (
                     <a
                       href={item.url}
@@ -111,10 +111,10 @@ export function NewsCard({ items: rawItems, category }: NewsCardProps) {
                 </h4>
 
                 {(item.summary || item.description) && (
-                  <p className="text-xs text-zinc-500 line-clamp-2 mb-2">{item.summary || item.description}</p>
+                  <p className="text-xs text-neutral-400 line-clamp-2 mb-2">{item.summary || item.description}</p>
                 )}
 
-                <div className="flex items-center gap-3 text-xs text-zinc-500">
+                <div className="flex items-center gap-3 text-xs text-neutral-400">
                   {item.source && (
                     <span className="flex items-center gap-1">
                       <Tag className="h-3 w-3" />
