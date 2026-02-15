@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og"
 
 export const runtime = "edge"
 
-export const alt = "D23 AI - Bharat's WhatsApp AI Assistant"
+export const alt = "D23 AI - Your Multilingual WhatsApp AI"
 export const size = {
   width: 1200,
   height: 630,
@@ -20,8 +20,8 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#000",
-          backgroundImage: "linear-gradient(135deg, #1a1a2e 0%, #0a0a0a 100%)",
+          backgroundColor: "#FAFAFA",
+          backgroundImage: "linear-gradient(135deg, #FFFFFF 0%, #F5F5F5 100%)",
           position: "relative",
         }}
       >
@@ -34,7 +34,7 @@ export default async function Image() {
             width: 400,
             height: 400,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%)",
             filter: "blur(60px)",
           }}
         />
@@ -46,7 +46,7 @@ export default async function Image() {
             width: 500,
             height: 500,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(236,72,153,0.2) 0%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%)",
             filter: "blur(80px)",
           }}
         />
@@ -73,7 +73,7 @@ export default async function Image() {
               style={{
                 fontSize: 160,
                 fontWeight: 700,
-                color: "white",
+                color: "#171717",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -83,7 +83,7 @@ export default async function Image() {
               style={{
                 fontSize: 160,
                 fontWeight: 700,
-                background: "linear-gradient(90deg, #8B5CF6 0%, #D946EF 50%, #EC4899 100%)",
+                background: "linear-gradient(90deg, #7c3aed 0%, #6366f1 50%, #3b82f6 100%)",
                 backgroundClip: "text",
                 color: "transparent",
                 letterSpacing: "-0.02em",
@@ -97,22 +97,22 @@ export default async function Image() {
           <p
             style={{
               fontSize: 40,
-              color: "#a1a1aa",
+              color: "#525252",
               marginTop: 10,
               marginBottom: 16,
             }}
           >
-            Bharat's First WhatsApp AI Assistant
+            Your Multilingual WhatsApp AI
           </p>
 
           {/* Features */}
           <p
             style={{
               fontSize: 28,
-              color: "#71717a",
+              color: "#737373",
             }}
           >
-            11+ Indian Languages | Voice | Images | Games
+            11+ Languages | Voice | Images | Games
           </p>
         </div>
       </div>

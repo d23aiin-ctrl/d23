@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 function GradientText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <span className={cn(
-      "bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent",
+      "bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 bg-clip-text text-transparent",
       className
     )}>
       {children}
@@ -22,7 +22,7 @@ function GradientText({ children, className = "" }: { children: React.ReactNode;
   )
 }
 
-// Code Block Component
+// Code Block Component (stays dark — standard for code blocks in light themes)
 function CodeBlock({ code, language = "bash" }: { code: string; language?: string }) {
   const [copied, setCopied] = useState(false)
 
@@ -34,12 +34,12 @@ function CodeBlock({ code, language = "bash" }: { code: string; language?: strin
 
   return (
     <div className="relative group">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden">
-        <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800 bg-zinc-900/50">
-          <span className="text-xs text-zinc-500">{language}</span>
+      <div className="bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden">
+        <div className="flex items-center justify-between px-4 py-2 border-b border-neutral-800 bg-neutral-900/50">
+          <span className="text-xs text-neutral-500">{language}</span>
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1 text-xs text-zinc-500 hover:text-white transition-colors"
+            className="flex items-center gap-1 text-xs text-neutral-400 hover:text-white transition-colors"
           >
             {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
             {copied ? "Copied!" : "Copy"}
@@ -53,14 +53,15 @@ function CodeBlock({ code, language = "bash" }: { code: string; language?: strin
   )
 }
 
-// Header Component
+// Header Component (light theme)
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-neutral-200/80" style={{boxShadow: '0 1px 3px rgba(0,0,0,0.04)'}}>
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/d23-logo-icon.png" alt="D23" width={40} height={40} />
+            <span className="text-xl font-bold">D23 <GradientText>AI</GradientText></span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -68,7 +69,7 @@ function Header() {
               <Link
                 key={item}
                 href={`/${item.toLowerCase()}`}
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
+                className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
               >
                 {item}
               </Link>
@@ -78,7 +79,7 @@ function Header() {
           <Link
             href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
             target="_blank"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-sm font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium"
           >
             <Zap className="h-4 w-4" />
             Try Now
@@ -144,14 +145,14 @@ const requirements = [
 
 export default function MCPPage() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white text-neutral-900 overflow-x-hidden">
       <Header />
 
       {/* Background */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/10 rounded-full blur-[120px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-100/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-100/15 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
 
       <main className="relative z-10 pt-32 pb-20">
@@ -162,33 +163,30 @@ export default function MCPPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-16"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 mb-6">
-              <Server className="h-4 w-4 text-violet-400" />
-              <span className="text-sm text-violet-300">MCP Integration</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200/80 mb-6">
+              <Server className="h-4 w-4 text-neutral-600" />
+              <span className="text-sm text-neutral-600">MCP Integration</span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
               Model Context Protocol
             </h1>
-            <p className="text-lg text-zinc-400 mb-8">
-              Extend <span className="text-white font-semibold">D23 AI</span> with custom tools and capabilities using the Model Context Protocol.
+            <p className="text-lg text-neutral-600 mb-8">
+              Extend <span className="text-neutral-900 font-semibold">D23 AI</span> with custom tools and capabilities using the Model Context Protocol.
             </p>
 
             {/* Info Box */}
-            <div className="relative p-[1px] rounded-xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-fuchsia-500" />
-              <div className="relative bg-zinc-900 rounded-xl p-6">
-                <div className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500">
-                    <Sparkles className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-2">What is MCP?</h3>
-                    <p className="text-sm text-zinc-400">
-                      The Model Context Protocol (MCP) allows you to connect external tools, databases, and services to D23 AI.
-                      This enables D23 to access your files, query databases, call APIs, and more.
-                    </p>
-                  </div>
+            <div className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-lg">
+              <div className="flex gap-4">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600">
+                  <Sparkles className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-neutral-900 mb-2">What is MCP?</h3>
+                  <p className="text-sm text-neutral-600">
+                    The Model Context Protocol (MCP) allows you to connect external tools, databases, and services to D23 AI.
+                    This enables D23 to access your files, query databases, call APIs, and more.
+                  </p>
                 </div>
               </div>
             </div>
@@ -201,30 +199,30 @@ export default function MCPPage() {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Supported Features</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Supported Features</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-                <h3 className="flex items-center gap-2 text-green-400 font-semibold mb-4">
+              <div className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
+                <h3 className="flex items-center gap-2 text-green-600 font-semibold mb-4">
                   <CheckCircle2 className="h-5 w-5" />
                   Supported
                 </h3>
                 <ul className="space-y-3">
                   {mcpFeatures.supported.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-zinc-300">
+                    <li key={i} className="flex items-start gap-2 text-sm text-neutral-700">
                       <CheckCircle2 className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-                <h3 className="flex items-center gap-2 text-red-400 font-semibold mb-4">
+              <div className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
+                <h3 className="flex items-center gap-2 text-red-500 font-semibold mb-4">
                   <XCircle className="h-5 w-5" />
                   Not Yet Supported
                 </h3>
                 <ul className="space-y-3">
                   {mcpFeatures.notSupported.map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-zinc-400">
+                    <li key={i} className="flex items-start gap-2 text-sm text-neutral-700">
                       <XCircle className="h-4 w-4 text-red-500 mt-0.5 shrink-0" />
                       {item}
                     </li>
@@ -241,17 +239,17 @@ export default function MCPPage() {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Getting Started</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Getting Started</h2>
 
             <div className="space-y-6">
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <div className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white font-semibold">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-white font-semibold">
                     1
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-white mb-2">Install an MCP Server</h3>
-                    <p className="text-sm text-zinc-400 mb-4">
+                    <h3 className="font-semibold text-neutral-900 mb-2">Install an MCP Server</h3>
+                    <p className="text-sm text-neutral-600 mb-4">
                       First, install an MCP server package. For example, the filesystem server:
                     </p>
                     <CodeBlock code="npm install -g @anthropic/mcp-filesystem" />
@@ -259,14 +257,14 @@ export default function MCPPage() {
                 </div>
               </div>
 
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <div className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white font-semibold">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-white font-semibold">
                     2
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-white mb-2">Register with D23</h3>
-                    <p className="text-sm text-zinc-400 mb-4">
+                    <h3 className="font-semibold text-neutral-900 mb-2">Register with D23</h3>
+                    <p className="text-sm text-neutral-600 mb-4">
                       Add the MCP server to D23 using the /mcp command:
                     </p>
                     <CodeBlock code="/mcp add filesystem npx @anthropic/mcp-filesystem /path/to/folder" />
@@ -274,14 +272,14 @@ export default function MCPPage() {
                 </div>
               </div>
 
-              <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <div className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
                 <div className="flex items-start gap-4">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white font-semibold">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-white font-semibold">
                     3
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-white mb-2">Start Using</h3>
-                    <p className="text-sm text-zinc-400">
+                    <h3 className="font-semibold text-neutral-900 mb-2">Start Using</h3>
+                    <p className="text-sm text-neutral-600">
                       D23 AI will automatically detect and use the tools provided by your MCP server.
                       Just ask naturally, e.g., "List all files in my documents folder".
                     </p>
@@ -298,16 +296,16 @@ export default function MCPPage() {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Command Reference</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Command Reference</h2>
 
             <div className="space-y-4">
               {commands.map((cmd, i) => (
-                <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-                  <h3 className="font-semibold text-white mb-2">{cmd.name}</h3>
+                <div key={i} className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
+                  <h3 className="font-semibold text-neutral-900 mb-2">{cmd.name}</h3>
                   <CodeBlock code={cmd.command} language="command" />
-                  <p className="text-sm text-zinc-400 mt-3 mb-2">{cmd.description}</p>
-                  <p className="text-xs text-zinc-500">
-                    <span className="text-violet-400">Example:</span> {cmd.example}
+                  <p className="text-sm text-neutral-600 mt-3 mb-2">{cmd.description}</p>
+                  <p className="text-xs text-neutral-500">
+                    <span className="text-violet-600">Example:</span> {cmd.example}
                   </p>
                 </div>
               ))}
@@ -321,32 +319,32 @@ export default function MCPPage() {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-2xl font-bold text-white mb-6">Server Requirements</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-6">Server Requirements</h2>
 
             <div className="grid md:grid-cols-3 gap-4">
               {requirements.map((req, i) => {
                 const Icon = req.icon
                 return (
-                  <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 flex items-center justify-center mb-4 border border-violet-500/20">
-                      <Icon className="h-6 w-6 text-violet-400" />
+                  <div key={i} className="bg-white rounded-2xl border border-neutral-200/80 p-6 shadow-md">
+                    <div className="w-12 h-12 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center mb-4">
+                      <Icon className="h-6 w-6 text-neutral-600" />
                     </div>
-                    <h3 className="font-semibold text-white mb-2">{req.title}</h3>
-                    <p className="text-sm text-zinc-400">{req.description}</p>
+                    <h3 className="font-semibold text-neutral-900 mb-2">{req.title}</h3>
+                    <p className="text-sm text-neutral-600">{req.description}</p>
                   </div>
                 )
               })}
             </div>
           </motion.section>
 
-          {/* Help Section */}
+          {/* Help Section (stays dark gradient for contrast) */}
           <motion.section
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <div className="relative rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600" />
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600" />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
               <div className="relative z-10 p-8 md:p-12 text-center">
@@ -357,7 +355,7 @@ export default function MCPPage() {
                 </p>
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-violet-600 font-semibold hover:bg-zinc-100 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-violet-600 font-semibold hover:bg-neutral-100 transition-colors"
                 >
                   <MessageCircle className="h-5 w-5" />
                   Contact Us
@@ -368,18 +366,18 @@ export default function MCPPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 border-t border-white/10">
+      {/* Footer (light theme) */}
+      <footer className="relative z-10 py-12 px-6 border-t border-neutral-200">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <Image src="/puch/logo.png" alt="D23 AI" width={40} height={40} />
+              <Image src="/d23-logo-icon.png" alt="D23 AI" width={40} height={40} />
               <div>
-                <p className="text-lg font-bold text-white">D23 <GradientText>AI</GradientText></p>
-                <p className="text-sm text-zinc-500">WhatsApp-native AI for Bharat.</p>
+                <p className="text-lg font-bold text-neutral-900">D23 <GradientText>AI</GradientText></p>
+                <p className="text-sm text-neutral-400">Your multilingual WhatsApp AI.</p>
               </div>
             </div>
-            <p className="text-sm text-zinc-500">© 2025 D23 AI. Built for every Indian language.</p>
+            <p className="text-sm text-neutral-400">&copy; 2026 D23 AI. Built for every language.</p>
           </div>
         </div>
       </footer>

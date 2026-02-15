@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils"
 function GradientText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <span className={cn(
-      "bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent",
+      "bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 bg-clip-text text-transparent",
       className
     )}>
       {children}
@@ -24,11 +24,15 @@ function GradientText({ children, className = "" }: { children: React.ReactNode;
 // Header Component
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/10">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-neutral-200/80"
+      style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
+    >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/d23-logo-icon.png" alt="D23" width={40} height={40} />
+            <span className="text-xl font-bold">D23 <GradientText>AI</GradientText></span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -36,7 +40,7 @@ function Header() {
               <Link
                 key={item}
                 href={`/${item.toLowerCase()}`}
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
+                className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
               >
                 {item}
               </Link>
@@ -46,7 +50,7 @@ function Header() {
           <Link
             href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
             target="_blank"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-sm font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium"
           >
             <Zap className="h-4 w-4" />
             Try Now
@@ -111,8 +115,8 @@ const values = [
   },
   {
     icon: Heart,
-    title: "Built for India",
-    description: "Designed specifically for Indian users with support for 11+ regional languages.",
+    title: "Built for Everyone",
+    description: "Designed for users everywhere with support for 11+ languages.",
     color: "from-fuchsia-500 to-pink-500"
   },
   {
@@ -139,14 +143,15 @@ const stats = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white text-neutral-900 overflow-x-hidden">
       <Header />
 
       {/* Background */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/10 rounded-full blur-[120px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-100/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-100/15 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 right-1/3 w-[400px] h-[400px] bg-sky-100/15 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
 
       <main className="relative z-10">
@@ -159,7 +164,7 @@ export default function AboutPage() {
               className="mb-8"
             >
               <Image
-                src="/puch/logo.png"
+                src="/d23-logo-icon.png"
                 alt="D23 AI Logo"
                 width={120}
                 height={120}
@@ -171,7 +176,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mb-6"
             >
               We are on a <GradientText>mission</GradientText>
               <br />
@@ -182,16 +187,16 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-zinc-400 max-w-3xl mx-auto"
+              className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto"
             >
-              D23 AI is building the future of conversational AI for India.
+              D23 AI is building the future of multilingual conversational AI.
               We believe everyone deserves access to powerful AI tools in their own language.
             </motion.p>
           </div>
         </section>
 
         {/* Stats */}
-        <section className="py-12 px-6 border-y border-white/10">
+        <section className="py-12 px-6 border-y border-neutral-200">
           <div className="max-w-5xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, i) => (
@@ -203,10 +208,10 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   className="text-center"
                 >
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-1">
+                  <div className="text-3xl md:text-4xl font-bold text-neutral-900 mb-1">
                     <GradientText>{stat.value}</GradientText>
                   </div>
-                  <div className="text-sm text-zinc-500">{stat.label}</div>
+                  <div className="text-sm text-neutral-500">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
@@ -222,8 +227,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <span className="text-violet-400 text-sm font-semibold tracking-wider uppercase">Our Story</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mt-3">
+              <span className="text-neutral-600 text-sm font-semibold tracking-wider uppercase">Our Story</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mt-3">
                 Why we built <GradientText>D23 AI</GradientText>
               </h2>
             </motion.div>
@@ -232,19 +237,19 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="space-y-6 text-lg text-zinc-400 leading-relaxed"
+              className="space-y-6 text-lg text-neutral-600 leading-relaxed"
             >
               <p>
-                India is home to over a billion people speaking hundreds of languages.
+                The world is home to thousands of languages.
                 Yet, most AI tools are built primarily for English speakers, leaving a vast majority behind.
               </p>
               <p>
-                We started D23 AI with a simple belief: <span className="text-white font-medium">AI should speak your language</span>.
-                Whether you're a farmer in Punjab asking about weather, a student in Tamil Nadu seeking homework help,
-                or a shopkeeper in Maharashtra checking train timings – D23 AI is here to help.
+                We started D23 AI with a simple belief: <span className="text-neutral-900 font-medium">AI should speak your language</span>.
+                Whether you're a farmer asking about weather, a student seeking homework help,
+                or a shopkeeper checking train timings -- D23 AI is here to help.
               </p>
               <p>
-                Built on WhatsApp – the app India loves – D23 AI brings the power of advanced AI to your fingertips,
+                Built on WhatsApp -- the world's most popular messaging app -- D23 AI brings the power of advanced AI to your fingertips,
                 in Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, and many more languages.
               </p>
             </motion.div>
@@ -260,8 +265,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <span className="text-violet-400 text-sm font-semibold tracking-wider uppercase">Our Values</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mt-3">
+              <span className="text-neutral-600 text-sm font-semibold tracking-wider uppercase">Our Values</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mt-3">
                 What drives us
               </h2>
             </motion.div>
@@ -276,19 +281,17 @@ export default function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
                     viewport={{ once: true }}
-                    className="group relative p-[1px] rounded-2xl overflow-hidden"
+                    className="bg-white rounded-2xl border border-neutral-200/80 p-6 hover:border-neutral-300 hover:shadow-lg transition-all"
+                    style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.06)' }}
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 group-hover:from-violet-500 group-hover:to-fuchsia-500 transition-all duration-500" />
-                    <div className="relative bg-zinc-900 rounded-2xl p-6">
-                      <div className={cn(
-                        "w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br",
-                        value.color
-                      )}>
-                        <Icon className="h-7 w-7 text-white" />
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-2">{value.title}</h3>
-                      <p className="text-zinc-400">{value.description}</p>
+                    <div className={cn(
+                      "w-14 h-14 rounded-xl flex items-center justify-center mb-4 bg-gradient-to-br",
+                      value.color
+                    )}>
+                      <Icon className="h-7 w-7 text-white" />
                     </div>
+                    <h3 className="text-xl font-bold text-neutral-900 mb-2">{value.title}</h3>
+                    <p className="text-neutral-600">{value.description}</p>
                   </motion.div>
                 )
               })}
@@ -305,8 +308,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <span className="text-violet-400 text-sm font-semibold tracking-wider uppercase">Our Team</span>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mt-3">
+              <span className="text-neutral-600 text-sm font-semibold tracking-wider uppercase">Our Team</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mt-3">
                 Meet the founders
               </h2>
             </motion.div>
@@ -322,26 +325,26 @@ export default function AboutPage() {
                   className="text-center"
                 >
                   <div className="relative w-32 h-32 mx-auto mb-4">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 blur-md opacity-50" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-violet-300 to-indigo-300 blur-md opacity-40" />
                     {member.image ? (
                       <Image
                         src={member.image}
                         alt={member.name}
                         width={128}
                         height={128}
-                        className="relative w-32 h-32 rounded-full object-cover border-2 border-violet-500/50"
+                        className="relative w-32 h-32 rounded-full object-cover border-2 border-neutral-300"
                       />
                     ) : (
-                      <div className="relative w-32 h-32 rounded-full bg-zinc-800 flex items-center justify-center border-2 border-violet-500/50">
-                        <span className="text-4xl font-bold text-white">{member.name[0]}</span>
+                      <div className="relative w-32 h-32 rounded-full bg-neutral-100 flex items-center justify-center border-2 border-neutral-300">
+                        <span className="text-4xl font-bold text-neutral-900">{member.name[0]}</span>
                       </div>
                     )}
                   </div>
-                  <h3 className="text-lg font-semibold text-white">{member.name}</h3>
-                  <p className="text-sm text-zinc-400 mb-3">{member.role}</p>
+                  <h3 className="text-lg font-semibold text-neutral-900">{member.name}</h3>
+                  <p className="text-sm text-neutral-500 mb-3">{member.role}</p>
                   <a
                     href={member.linkedin}
-                    className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-colors mx-auto"
+                    className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 transition-colors mx-auto"
                   >
                     <Linkedin className="h-4 w-4" />
                   </a>
@@ -356,8 +359,8 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center mt-20 mb-12"
             >
-              <span className="text-fuchsia-400 text-sm font-semibold tracking-wider uppercase">Development Team</span>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mt-3">
+              <span className="text-neutral-600 text-sm font-semibold tracking-wider uppercase">Development Team</span>
+              <h3 className="text-2xl md:text-3xl font-bold text-neutral-900 mt-3">
                 Meet the developers
               </h3>
             </motion.div>
@@ -373,26 +376,26 @@ export default function AboutPage() {
                   className="text-center"
                 >
                   <div className="relative w-24 h-24 mx-auto mb-4">
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 blur-md opacity-40" />
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-300 to-blue-300 blur-md opacity-30" />
                     {dev.image ? (
                       <Image
                         src={dev.image}
                         alt={dev.name}
                         width={96}
                         height={96}
-                        className="relative w-24 h-24 rounded-full object-cover border-2 border-cyan-500/50"
+                        className="relative w-24 h-24 rounded-full object-cover border-2 border-neutral-300"
                       />
                     ) : (
-                      <div className="relative w-24 h-24 rounded-full bg-zinc-800 flex items-center justify-center border-2 border-cyan-500/50">
-                        <span className="text-3xl font-bold text-white">{dev.name[0]}</span>
+                      <div className="relative w-24 h-24 rounded-full bg-neutral-100 flex items-center justify-center border-2 border-neutral-300">
+                        <span className="text-3xl font-bold text-neutral-900">{dev.name[0]}</span>
                       </div>
                     )}
                   </div>
-                  <h3 className="text-lg font-semibold text-white">{dev.name}</h3>
-                  <p className="text-sm text-zinc-400 mb-3">{dev.role}</p>
+                  <h3 className="text-lg font-semibold text-neutral-900">{dev.name}</h3>
+                  <p className="text-sm text-neutral-500 mb-3">{dev.role}</p>
                   <a
                     href={dev.linkedin}
-                    className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 hover:text-white hover:bg-white/10 transition-colors mx-auto"
+                    className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-neutral-500 hover:text-neutral-900 hover:bg-neutral-200 transition-colors mx-auto"
                   >
                     <Linkedin className="h-4 w-4" />
                   </a>
@@ -402,7 +405,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* CTA - stays dark for contrast */}
         <section className="py-20 px-6">
           <div className="max-w-4xl mx-auto">
             <motion.div
@@ -411,7 +414,7 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="relative rounded-3xl overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600" />
+              <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600" />
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
               <div className="relative z-10 p-12 md:p-20 text-center">
@@ -419,13 +422,13 @@ export default function AboutPage() {
                   Ready to try D23 AI?
                 </h2>
                 <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-                  Join thousands of Indians using AI in their own language.
+                  Join thousands of users worldwide using AI in their own language.
                 </p>
 
                 <Link
                   href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
                   target="_blank"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-violet-600 font-semibold shadow-2xl hover:bg-zinc-100 transition-colors"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-violet-600 font-semibold shadow-2xl hover:bg-neutral-50 transition-colors"
                 >
                   <MessageCircle className="h-5 w-5" />
                   Start Chatting
@@ -438,17 +441,17 @@ export default function AboutPage() {
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 border-t border-white/10">
+      <footer className="relative z-10 py-12 px-6 border-t border-neutral-200">
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <Image src="/puch/logo.png" alt="D23 AI" width={40} height={40} />
+              <Image src="/d23-logo-icon.png" alt="D23 AI" width={40} height={40} />
               <div>
-                <p className="text-lg font-bold text-white">D23 <GradientText>AI</GradientText></p>
-                <p className="text-sm text-zinc-500">WhatsApp-native AI for Bharat.</p>
+                <p className="text-lg font-bold text-neutral-900">D23 <GradientText>AI</GradientText></p>
+                <p className="text-sm text-neutral-400">Your multilingual WhatsApp AI.</p>
               </div>
             </div>
-            <p className="text-sm text-zinc-500">© 2025 D23 AI. Built for every Indian language.</p>
+            <p className="text-sm text-neutral-400">&copy; 2026 D23 AI. Built for every language.</p>
           </div>
         </div>
       </footer>

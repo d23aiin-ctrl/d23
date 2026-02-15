@@ -26,7 +26,7 @@ const integrations = [
   {
     id: "multilingual",
     icon: Languages,
-    title: "11+ Indian Languages",
+    title: "11+ Languages",
     description: "Speak in Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati & more.",
     details: "Full support for Hindi, Tamil, Telugu, Bengali, Marathi, Gujarati, Kannada, Malayalam, Punjabi, Odia and English.",
     howToUse: "Just type or speak in your preferred language. D23 AI automatically detects and responds in the same language.",
@@ -95,7 +95,7 @@ const integrations = [
 function GradientText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
     <span className={cn(
-      "bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent",
+      "bg-gradient-to-r from-violet-600 via-indigo-500 to-blue-500 bg-clip-text text-transparent",
       className
     )}>
       {children}
@@ -106,11 +106,15 @@ function GradientText({ children, className = "" }: { children: React.ReactNode;
 // Header Component
 function Header() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/70 backdrop-blur-xl border-b border-white/10">
+    <header
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-neutral-200/80"
+      style={{ boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}
+    >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/d23-logo-icon.png" alt="D23" width={40} height={40} />
+            <span className="text-xl font-bold">D23 <GradientText>AI</GradientText></span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -118,7 +122,7 @@ function Header() {
               <Link
                 key={item}
                 href={`/${item.toLowerCase()}`}
-                className="text-sm text-zinc-400 hover:text-white transition-colors"
+                className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
               >
                 {item}
               </Link>
@@ -128,7 +132,7 @@ function Header() {
           <Link
             href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
             target="_blank"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white text-sm font-medium"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium"
           >
             <Zap className="h-4 w-4" />
             Try Now
@@ -145,26 +149,26 @@ function HeroSection() {
     <section className="relative pt-32 pb-20 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-violet-600/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/20 rounded-full blur-[120px]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-100/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-amber-100/15 rounded-full blur-[120px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neutral-100 border border-neutral-200/80 mb-8"
         >
-          <Sparkles className="h-4 w-4 text-violet-400" />
-          <span className="text-sm text-violet-300">Powerful Integrations</span>
+          <Sparkles className="h-4 w-4 text-violet-600" />
+          <span className="text-sm text-neutral-600">Powerful Integrations</span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
+          className="text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 mb-6"
         >
           Everything D23 AI
           <br />
@@ -175,7 +179,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10"
+          className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto mb-10"
         >
           Discover the power of AI-driven conversations with seamless integrations
           across platforms, services, and tools that matter to you.
@@ -190,7 +194,7 @@ function HeroSection() {
           <Link
             href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
             target="_blank"
-            className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-semibold shadow-lg shadow-violet-500/25"
+            className="flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-semibold shadow-lg shadow-violet-500/15"
           >
             <MessageCircle className="h-5 w-5" />
             Try on WhatsApp
@@ -198,7 +202,7 @@ function HeroSection() {
           </Link>
           <Link
             href="/chat"
-            className="flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 text-white font-semibold hover:bg-white/5 transition-colors"
+            className="flex items-center gap-2 px-8 py-4 rounded-full border-2 border-neutral-200 text-neutral-900 font-semibold hover:border-neutral-300 hover:bg-neutral-50 transition-colors"
           >
             Try Web Chat
           </Link>
@@ -222,52 +226,47 @@ function IntegrationCard({ integration, index }: { integration: typeof integrati
       transition={{ delay: index * 0.1 }}
       className="group relative"
     >
-      <div className="relative p-[1px] rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute inset-0 bg-zinc-800" />
+      <div className="bg-white rounded-2xl border border-neutral-200/80 overflow-hidden hover:border-neutral-300 hover:shadow-lg transition-all">
+        {/* Image */}
+        <div className="relative h-48 overflow-hidden">
+          <Image
+            src={integration.image}
+            alt={integration.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/50 to-transparent" />
 
-        <div className="relative bg-zinc-900 rounded-2xl overflow-hidden">
-          {/* Image */}
-          <div className="relative h-48 overflow-hidden">
-            <Image
-              src={integration.image}
-              alt={integration.title}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/50 to-transparent" />
+          {/* Icon Badge */}
+          <div className={cn(
+            "absolute top-4 left-4 w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br shadow-lg",
+            integration.color
+          )}>
+            <Icon className="w-6 h-6 text-white" />
+          </div>
+        </div>
 
-            {/* Icon Badge */}
-            <div className={cn(
-              "absolute top-4 left-4 w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br shadow-lg",
-              integration.color
-            )}>
-              <Icon className="w-6 h-6 text-white" />
-            </div>
+        {/* Content */}
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-neutral-900 mb-2">{integration.title}</h3>
+          <p className="text-neutral-600 text-sm mb-4">{integration.description}</p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {integration.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 rounded-full bg-neutral-100 border border-neutral-200/60 text-xs text-neutral-500"
+              >
+                {tag}
+              </span>
+            ))}
           </div>
 
-          {/* Content */}
-          <div className="p-6">
-            <h3 className="text-xl font-bold text-white mb-2">{integration.title}</h3>
-            <p className="text-zinc-400 text-sm mb-4">{integration.description}</p>
-
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-4">
-              {integration.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-zinc-400"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            {/* How to Use */}
-            <div className="pt-4 border-t border-white/10">
-              <p className="text-xs text-zinc-500 mb-1">How to use:</p>
-              <p className="text-sm text-zinc-300">{integration.howToUse}</p>
-            </div>
+          {/* How to Use */}
+          <div className="pt-4 border-t border-neutral-200">
+            <p className="text-xs text-neutral-500 mb-1">How to use:</p>
+            <p className="text-sm text-neutral-700">{integration.howToUse}</p>
           </div>
         </div>
       </div>
@@ -286,8 +285,8 @@ function IntegrationsGrid() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-violet-400 text-sm font-semibold tracking-wider uppercase">Capabilities</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3">
+          <span className="text-neutral-600 text-sm font-semibold tracking-wider uppercase">Capabilities</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mt-3">
             Explore all <GradientText>integrations</GradientText>
           </h2>
         </motion.div>
@@ -313,7 +312,7 @@ function CTASection() {
           viewport={{ once: true }}
           className="relative rounded-3xl overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-pink-600" />
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
           <div className="relative z-10 p-12 md:p-20 text-center">
@@ -328,7 +327,7 @@ function CTASection() {
               <Link
                 href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
                 target="_blank"
-                className="flex items-center gap-2 px-8 py-4 rounded-full bg-white text-violet-600 font-semibold shadow-2xl hover:bg-zinc-100 transition-colors"
+                className="flex items-center gap-2 px-8 py-4 rounded-full bg-white text-violet-600 font-semibold shadow-2xl hover:bg-neutral-100 transition-colors"
               >
                 <MessageCircle className="h-5 w-5" />
                 Start on WhatsApp
@@ -344,18 +343,18 @@ function CTASection() {
 // Footer
 function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-white/10">
+    <footer className="py-12 px-6 border-t border-neutral-200">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <Image src="/puch/logo.png" alt="D23 AI" width={40} height={40} />
+            <Image src="/d23-logo-icon.png" alt="D23 AI" width={40} height={40} />
             <div>
-              <p className="text-lg font-bold text-white">D23 <GradientText>AI</GradientText></p>
-              <p className="text-sm text-zinc-500">WhatsApp-native AI for Bharat.</p>
+              <p className="text-lg font-bold text-neutral-900">D23 <GradientText>AI</GradientText></p>
+              <p className="text-sm text-neutral-400">Your multilingual WhatsApp AI.</p>
             </div>
           </div>
 
-          <p className="text-sm text-zinc-500">© 2025 D23 AI. Built for every Indian language.</p>
+          <p className="text-sm text-neutral-400">&copy; 2026 D23 AI. Built for every language.</p>
         </div>
       </div>
     </footer>
@@ -365,7 +364,7 @@ function Footer() {
 // Main Page
 export default function IntegrationsPage() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white text-neutral-900 overflow-x-hidden">
       <Header />
       <main>
         <HeroSection />

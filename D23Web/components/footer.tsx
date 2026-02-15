@@ -26,7 +26,7 @@ export function Footer() {
             <Image src="/d23ai-logo-v8.svg" alt="D23 AI" width={40} height={40} className="h-10 w-10" />
             <div>
               <p className="text-lg font-semibold text-foreground">{footerData.logo}</p>
-              <p className="text-sm text-foreground/60">WhatsApp-native AI for Bharat.</p>
+              <p className="text-sm text-foreground/60">Your multilingual WhatsApp AI.</p>
             </div>
           </div>
           <Button
