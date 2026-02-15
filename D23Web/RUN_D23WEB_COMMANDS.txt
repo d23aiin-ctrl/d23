@@ -1,0 +1,78 @@
+========================================
+🚀 RUN D23WEB ON PORT 5050
+========================================
+
+METHOD 1: Use the Startup Script (Easiest)
+-------------------------------------------
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+./RUN_ON_5050.sh
+
+METHOD 2: Quick One-Liner
+--------------------------
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web && PORT=5050 npm run dev
+
+METHOD 3: Manual Steps
+-----------------------
+# Step 1: Navigate to D23Web
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+
+# Step 2: Install dependencies (first time only)
+npm install
+
+# Step 3: Run on port 5050
+PORT=5050 npm run dev
+
+METHOD 4: Production Build
+---------------------------
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+npm run build
+PORT=5050 npm start
+
+========================================
+📊 ACCESS POINTS
+========================================
+
+Admin Dashboard:  http://localhost:5050/admin/whatsapp
+Login Page:       http://localhost:5050/admin/login
+Health Check:     http://localhost:5050/
+
+Default Credentials:
+Username: admin
+Password: admin123
+
+========================================
+🔧 TROUBLESHOOTING
+========================================
+
+Port already in use:
+lsof -ti:5050 | xargs kill -9
+
+Install dependencies:
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+npm install
+
+Clear cache and rebuild:
+rm -rf .next
+npm run build
+PORT=5050 npm run dev
+
+========================================
+🌐 COMBINED SETUP (D23Web + QA Backend)
+========================================
+
+Terminal 1 - Start QA Backend:
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/unified_platform
+./switch-env.sh qa
+source .venv/bin/activate
+python main.py
+
+Terminal 2 - Start D23Web Dashboard:
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+PORT=5050 npm run dev
+
+Then access:
+- Dashboard UI: http://localhost:5050/admin/whatsapp
+- Backend API: http://localhost:9002/docs
+- WhatsApp Bot: http://localhost:9001/webhook
+
+========================================

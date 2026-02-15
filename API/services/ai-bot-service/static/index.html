@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Bot - Chat</title>
+<style>
+:root {
+  --bg: #0f0f1a;
+  --surface: #1a1a2e;
+  --surface-2: #232340;
+  --border: #2d2d4a;
+  --text: #e8e8f0;
+  --text-muted: #8888aa;
+  --accent: #6c5ce7;
+  --accent-light: #a29bfe;
+  --user-bubble: #6c5ce7;
+  --bot-bubble: #1e1e3a;
+  --success: #00cec9;
+  --warning: #fdcb6e;
+  --error: #ff7675;
+  --shadow: rgba(0,0,0,0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-header h2 {
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, var(--accent-light), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sidebar-header p {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.service-status {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.service-status h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.status-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.status-chip {
+  font-size: 0.65rem;
+  padding: 3px 8px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.status-dot.healthy { background: var(--success); }
+.status-dot.unhealthy { background: var(--error); }
+.status-dot.checking { background: var(--warning); animation: pulse 1s infinite; }
+
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.suggestions {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.suggestions h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.suggestion-category {
+  margin-bottom: 16px;
+}
+
+.suggestion-category h4 {
+  font-size: 0.75rem;
+  color: var(--accent-light);
+  margin-bottom: 6px;
+}
+
+.suggestion-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  margin-bottom: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.suggestion-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* Main chat area */
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.chat-header {
+  padding: 16px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-header h1 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.connection-status {
+  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+}
+
+.connection-status .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.connection-status.connected .dot { background: var(--success); }
+.connection-status.disconnected .dot { background: var(--error); }
+.connection-status.connecting .dot { background: var(--warning); animation: pulse 1s infinite; }
+
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  scroll-behavior: smooth;
+}
+
+.message {
+  display: flex;
+  margin-bottom: 16px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+.message.user { justify-content: flex-end; }
+.message.bot { justify-content: flex-start; }
+
+.message-content {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.message.user .message-content {
+  background: var(--user-bubble);
+  border-bottom-right-radius: 4px;
+}
+
+.message.bot .message-content {
+  background: var(--bot-bubble);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+}
+
+.message-meta {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.message.user .message-meta { text-align: right; }
+
+.typing-indicator {
+  display: none;
+  padding: 12px 16px;
+  background: var(--bot-bubble);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+  margin-bottom: 16px;
+}
+
+.typing-indicator.visible { display: flex; gap: 4px; align-items: center; }
+
+.typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: typingBounce 1.4s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+  0%,60%,100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+.chat-input-area {
+  padding: 16px 24px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#messageInput {
+  flex: 1;
+  padding: 12px 18px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  color: var(--text);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+#messageInput:focus {
+  border-color: var(--accent);
+}
+
+#messageInput::placeholder {
+  color: var(--text-muted);
+}
+
+#sendBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+#sendBtn:hover { background: var(--accent-light); transform: scale(1.05); }
+#sendBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+#sendBtn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Markdown-like formatting */
+.message-content strong, .message-content b { color: var(--accent-light); }
+.message-content code {
+  background: rgba(108,92,231,0.2);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+/* Welcome screen */
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  text-align: center;
+  height: 100%;
+}
+
+.welcome h2 {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--accent-light), var(--success));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome p {
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  max-width: 500px;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.quick-action {
+  padding: 10px 16px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-action:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .message-content { max-width: 85%; }
+  .chat-input-area { padding: 12px 16px; }
+  .messages { padding: 16px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>AI Bot</h2>
+      <p>Powered by microservices</p>
+    </div>
+
+    <div class="service-status">
+      <h3>Services</h3>
+      <div class="status-grid" id="serviceStatus">
+        <span class="status-chip"><span class="status-dot checking" id="dot-travel"></span>Travel</span>
+        <span class="status-chip"><span class="status-dot checking" id="dot-astrology"></span>Astrology</span>
+        <span class="status-chip"><span class="status-dot checking" id="dot-finance"></span>Finance</span>
+        <span class="status-chip"><span class="status-dot checking" id="dot-government"></span>Govt</span>
+        <span class="status-chip"><span class="status-dot checking" id="dot-utility"></span>Utility</span>
+      </div>
+    </div>
+
+    <div class="suggestions">
+      <h3>Try asking</h3>
+
+      <div class="suggestion-category">
+        <h4>Travel</h4>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Check PNR 4521678903</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Schedule of train 12301</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Trains from Delhi to Mumbai</button>
+      </div>
+
+      <div class="suggestion-category">
+        <h4>Astrology</h4>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Aries horoscope</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Today's panchang</button>
+      </div>
+
+      <div class="suggestion-category">
+        <h4>Finance</h4>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">TCS stock price</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">EMI for 50 lakh at 8.5% for 20 years</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">SIP 10000/month for 10 years</button>
+      </div>
+
+      <div class="suggestion-category">
+        <h4>Government</h4>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">PM Kisan status 9876543210</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Vehicle info DL01AB1234</button>
+      </div>
+
+      <div class="suggestion-category">
+        <h4>Utility</h4>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Weather in Mumbai</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Gold rate today</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Petrol price in Delhi</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Convert 100 USD to INR</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">Pincode 400001</button>
+        <button class="suggestion-btn" onclick="sendSuggestion(this.textContent)">IFSC SBIN0001234</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main chat -->
+  <main class="chat-main">
+    <div class="chat-header">
+      <h1>Chat</h1>
+      <div class="connection-status connecting" id="connStatus">
+        <span class="dot"></span>
+        <span id="connText">Connecting...</span>
+      </div>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="welcome" id="welcome">
+        <h2>Hello!</h2>
+        <p>I can help you check PNR status, get weather, stock prices, horoscope, EMI calculations, and much more. Ask me anything in English or Hindi!</p>
+        <div class="quick-actions">
+          <button class="quick-action" onclick="sendSuggestion('Weather in Mumbai')">Weather in Mumbai</button>
+          <button class="quick-action" onclick="sendSuggestion('Aries horoscope')">Aries horoscope</button>
+          <button class="quick-action" onclick="sendSuggestion('TCS stock price')">TCS stock price</button>
+          <button class="quick-action" onclick="sendSuggestion('Gold rate today')">Gold rate today</button>
+          <button class="quick-action" onclick="sendSuggestion('Petrol price in Delhi')">Petrol price</button>
+          <button class="quick-action" onclick="sendSuggestion('Convert 100 USD to INR')">USD to INR</button>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+        <span class="typing-dot"></span>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <div class="input-container">
+        <input type="text" id="messageInput" placeholder="Ask me anything... (English / Hindi)" autocomplete="off">
+        <button id="sendBtn" onclick="sendMessage()" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const WS_URL = `ws://${window.location.host}/ws`;
+const messagesEl = document.getElementById('messages');
+const inputEl = document.getElementById('messageInput');
+const sendBtn = document.getElementById('sendBtn');
+const typingEl = document.getElementById('typingIndicator');
+const welcomeEl = document.getElementById('welcome');
+const connStatus = document.getElementById('connStatus');
+const connText = document.getElementById('connText');
+
+let ws = null;
+let sessionId = crypto.randomUUID ? crypto.randomUUID() : Date.now().toString();
+let messageCount = 0;
+
+function connect() {
+  setConnectionStatus('connecting');
+  ws = new WebSocket(WS_URL);
+
+  ws.onopen = () => {
+    setConnectionStatus('connected');
+    sendBtn.disabled = false;
+    checkServiceHealth();
+  };
+
+  ws.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    if (data.type === 'typing') {
+      showTyping(true);
+      return;
+    }
+
+    if (data.type === 'error') {
+      showTyping(false);
+      addMessage('bot', data.message || 'An error occurred.');
+      return;
+    }
+
+    if (data.type === 'message') {
+      showTyping(false);
+      if (data.session_id) sessionId = data.session_id;
+      addMessage('bot', data.response, data.intent);
+    }
+  };
+
+  ws.onclose = () => {
+    setConnectionStatus('disconnected');
+    sendBtn.disabled = true;
+    setTimeout(connect, 3000);
+  };
+
+  ws.onerror = () => {
+    setConnectionStatus('disconnected');
+  };
+}
+
+function setConnectionStatus(status) {
+  connStatus.className = 'connection-status ' + status;
+  const labels = { connected: 'Connected', disconnected: 'Disconnected', connecting: 'Connecting...' };
+  connText.textContent = labels[status] || status;
+}
+
+function sendMessage() {
+  const msg = inputEl.value.trim();
+  if (!msg || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+  if (welcomeEl) welcomeEl.style.display = 'none';
+
+  addMessage('user', msg);
+  ws.send(JSON.stringify({ message: msg, session_id: sessionId }));
+  inputEl.value = '';
+  inputEl.focus();
+}
+
+function sendSuggestion(text) {
+  inputEl.value = text;
+  sendMessage();
+}
+
+function addMessage(role, content, intent) {
+  messageCount++;
+  const div = document.createElement('div');
+  div.className = 'message ' + role;
+
+  const formatted = formatMarkdown(content);
+
+  const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  let metaText = time;
+  if (role === 'bot' && intent && intent !== 'greeting' && intent !== 'unknown') {
+    metaText += ' | ' + intent.replace(/_/g, ' ');
+  }
+
+  div.innerHTML = `
+    <div>
+      <div class="message-content">${formatted}</div>
+      <div class="message-meta">${metaText}</div>
+    </div>
+  `;
+
+  // Insert before typing indicator
+  messagesEl.insertBefore(div, typingEl);
+  scrollToBottom();
+}
+
+function formatMarkdown(text) {
+  if (!text) return '';
+  let html = escapeHtml(text);
+  // Bold: **text**
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Code: `text`
+  html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+  // Line breaks
+  html = html.replace(/\n/g, '<br>');
+  return html;
+}
+
+function escapeHtml(text) {
+  const d = document.createElement('div');
+  d.textContent = text;
+  return d.innerHTML;
+}
+
+function showTyping(visible) {
+  typingEl.classList.toggle('visible', visible);
+  if (visible) scrollToBottom();
+}
+
+function scrollToBottom() {
+  requestAnimationFrame(() => {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  });
+}
+
+async function checkServiceHealth() {
+  try {
+    const res = await fetch('/services/health');
+    const data = await res.json();
+    if (data.services) {
+      for (const [name, info] of Object.entries(data.services)) {
+        const dot = document.getElementById('dot-' + name);
+        if (dot) {
+          dot.className = 'status-dot ' + (info.status === 'healthy' ? 'healthy' : 'unhealthy');
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Could not check service health:', e);
+  }
+}
+
+// Event listeners
+inputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+// Initialize
+connect();
+inputEl.focus();
+
+// Periodically check service health
+setInterval(checkServiceHealth, 60000);
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'travel-service'
+    static_configs:
+      - targets: ['travel-service:8001']
+    metrics_path: /health
+
+  - job_name: 'astrology-service'
+    static_configs:
+      - targets: ['astrology-service:8003']
+    metrics_path: /health
+
+  - job_name: 'finance-service'
+    static_configs:
+      - targets: ['finance-service:8004']
+    metrics_path: /health
+
+  - job_name: 'government-service'
+    static_configs:
+      - targets: ['government-service:8005']
+    metrics_path: /health
+
+  - job_name: 'utility-service'
+    static_configs:
+      - targets: ['utility-service:8006']
+    metrics_path: /health

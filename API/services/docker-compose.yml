@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  travel-service:
+    build:
+      context: ./travel-service-clean
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      - SERVICE_NAME=travel-service
+      - PORT=8001
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  astrology-service:
+    build:
+      context: ./astrology-service-clean
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    environment:
+      - SERVICE_NAME=astrology-service
+      - PORT=8003
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  finance-service:
+    build:
+      context: ./finance-service-clean
+      dockerfile: Dockerfile
+    ports:
+      - "8004:8004"
+    environment:
+      - SERVICE_NAME=finance-service
+      - PORT=8004
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  government-service:
+    build:
+      context: ./government-service-clean
+      dockerfile: Dockerfile
+    ports:
+      - "8005:8005"
+    environment:
+      - SERVICE_NAME=government-service
+      - PORT=8005
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  utility-service:
+    build:
+      context: ./utility-service-clean
+      dockerfile: Dockerfile
+    ports:
+      - "8006:8006"
+    environment:
+      - SERVICE_NAME=utility-service
+      - PORT=8006
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8006/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+networks:
+  default:
+    name: ohgrt-services-network

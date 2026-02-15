@@ -1,0 +1,120 @@
+{
+  "hero": {
+    "title": "Need an answer?",
+    "subtitle": "just",
+    "rotatingWords": [
+      "पूछो",
+      "કહો",
+      "ಕೇಳಿ",
+      "అడుగు",
+      "D23"
+    ],
+    "description": "Your AI assistant that speaks your language. Get instant answers in Hindi, Tamil, Telugu & 11+ regional languages.",
+    "ctaPrimary": "Start on WhatsApp",
+    "ctaSecondary": "Try Web Chat",
+    "whatsappLink": "https://wa.me/918548819349"
+  },
+  "stats": [
+    {
+      "value": "50000+",
+      "label": "Active Users",
+      "icon": "👥"
+    },
+    {
+      "value": "11+",
+      "label": "Languages",
+      "icon": "🌐"
+    },
+    {
+      "value": "28/7",
+      "label": "Available",
+      "icon": "⚡"
+    },
+    {
+      "value": "<3s",
+      "label": "Response",
+      "icon": "🚀"
+    }
+  ],
+  "languages": [
+    {
+      "name": "हिंदी",
+      "code": "hi",
+      "english": "Hindi"
+    },
+    {
+      "name": "தமிழ்",
+      "code": "ta",
+      "english": "Tamil"
+    },
+    {
+      "name": "తెలుగు",
+      "code": "te",
+      "english": "Telugu"
+    },
+    {
+      "name": "ಕನ್ನಡ",
+      "code": "kn",
+      "english": "Kannada"
+    },
+    {
+      "name": "മലയാളം",
+      "code": "ml",
+      "english": "Malayalam"
+    },
+    {
+      "name": "ગુજરાતી",
+      "code": "gu",
+      "english": "Gujarati"
+    },
+    {
+      "name": "मराठी",
+      "code": "mr",
+      "english": "Marathi"
+    },
+    {
+      "name": "বাংলা",
+      "code": "bn",
+      "english": "Bengali"
+    },
+    {
+      "name": "ਪੰਜਾਬੀ",
+      "code": "pa",
+      "english": "Punjabi"
+    },
+    {
+      "name": "ଓଡ଼ିଆ",
+      "code": "or",
+      "english": "Odia"
+    },
+    {
+      "name": "English",
+      "code": "en",
+      "english": "English"
+    }
+  ],
+  "founders": [
+    {
+      "name": "Naseer",
+      "role": "Co-Founder & CEO",
+      "twitter": "#",
+      "linkedin": "#"
+    },
+    {
+      "name": "Pawan",
+      "role": "Co-Founder & CPO",
+      "twitter": "#",
+      "linkedin": "https://www.linkedin.com/in/pawan-k-singh-119b8a20/"
+    },
+    {
+      "name": "Rishi",
+      "role": "Co-Founder & CTO",
+      "twitter": "https://x.com/RishiSi92580328",
+      "linkedin": "https://www.linkedin.com/in/rishi-kumar-5878742a/"
+    }
+  ],
+  "meta": {
+    "title": "D23 AI | Bharat's WhatsApp AI Assistant",
+    "description": "Get instant answers in Hindi, Tamil, Telugu & 11+ Indian languages"
+  }
+}

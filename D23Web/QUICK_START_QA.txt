@@ -1,0 +1,87 @@
+========================================
+🚀 D23WEB QA QUICK START
+========================================
+
+API ENDPOINT: https://api.d23.ai
+Frontend Port: 5050
+
+========================================
+METHOD 1: Use Startup Script (Easiest)
+========================================
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+./RUN_QA_WITH_PROD_API.sh
+
+========================================
+METHOD 2: Quick One-Liner
+========================================
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web && PORT=5050 npm run dev
+
+(Uses production API via .env.local)
+
+========================================
+METHOD 3: Override to Use Local API
+========================================
+cd /Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web
+NEXT_PUBLIC_API_URL=http://localhost:9002 PORT=5050 npm run dev
+
+========================================
+📊 ACCESS POINTS
+========================================
+
+Frontend (Local):
+- Admin Dashboard:  http://localhost:5050/admin/whatsapp
+- Login Page:       http://localhost:5050/admin/login
+
+Frontend (Production):
+- Admin Dashboard:  https://d23.ai/admin/whatsapp
+- Login Page:       https://d23.ai/admin/login
+
+API (Production):
+- API Docs:         https://api.d23.ai/docs
+- Health Check:     https://api.d23.ai/health
+- Admin Login:      https://api.d23.ai/admin/login
+
+========================================
+🔐 LOGIN CREDENTIALS
+========================================
+Username: admin
+Password: admin123
+
+========================================
+🧪 TEST COMMANDS
+========================================
+
+# Test production API health
+curl https://api.d23.ai/health
+
+# Test login
+curl -X POST https://api.d23.ai/admin/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","password":"admin123"}'
+
+========================================
+🔧 TROUBLESHOOTING
+========================================
+
+Port already in use:
+lsof -ti:5050 | xargs kill -9
+
+Wrong API endpoint (check .env.local):
+cat .env.local
+# Should show: NEXT_PUBLIC_API_URL=https://api.d23.ai
+
+Restart frontend:
+lsof -ti:5050 | xargs kill -9
+PORT=5050 npm run dev
+
+========================================
+📁 CONFIGURATION FILES
+========================================
+
+Frontend API Config:
+/Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/D23Web/.env.local
+
+Backend CORS Config:
+/Users/rishi/Desktop/WorkSpace/AIBot/WhatsappBot&OhGrtApi/unified_platform/.env.qa
+
+========================================

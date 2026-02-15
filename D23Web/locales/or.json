@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "code": "or",
+    "name": "Odia",
+    "nativeName": "ଓଡ଼ିଆ"
+  },
+  "nav": {
+    "features": "ବୈଶିଷ୍ଟ୍ୟ",
+    "about": "ଆମ ବିଷୟରେ",
+    "contact": "ଯୋଗାଯୋଗ",
+    "getStarted": "ଆରମ୍ଭ କରନ୍ତୁ"
+  },
+  "hero": {
+    "badge": "WhatsApp ରେ ଆପଣଙ୍କ #1 ବହୁଭାଷୀ AI",
+    "headline1": "ଯାହା କିଛି ଦରକାର",
+    "headline2": "ବସ୍",
+    "headline3": "ପଚାରନ୍ତୁ",
+    "subtitle": "ଆପଣଙ୍କ AI ସହାୟକ ଯିଏ ଆପଣଙ୍କ ଭାଷାରେ କଥା କହେ। ହିନ୍ଦୀ, ତାମିଲ, ତେଲୁଗୁ ଏବଂ ୧୧+ ଭାଷାରେ ତୁରନ୍ତ ଉତ୍ତର ପାଆନ୍ତୁ।",
+    "ctaWhatsapp": "ହ୍ୱାଟ୍ସଆପରେ ଆରମ୍ଭ କରନ୍ତୁ",
+    "ctaWeb": "ୱେବ୍ ଚାଟ୍ ଚେଷ୍ଟା କରନ୍ତୁ",
+    "comingSoon": "ଶୀଘ୍ର ଆସୁଛି",
+    "appStore": "ଆପ୍ ଷ୍ଟୋର୍",
+    "playStore": "ଗୁଗଲ୍ ପ୍ଲେ",
+    "soon": "ଶୀଘ୍ର"
+  },
+  "stats": {
+    "users": "ସକ୍ରିୟ ଉପଭୋକ୍ତା",
+    "languages": "ଭାଷା",
+    "available": "ଉପಲବ୍ଧ",
+    "response": "ପ୍ରତିକ୍ରିୟା"
+  },
+  "languages": {
+    "title": "ଆପଣଙ୍କ",
+    "titleHighlight": "ଭାଷାରେ କୁହନ୍ତୁ",
+    "subtitle": "D23 AI ୧୧+ ଭାଷାରେ ବୁଝେ ଏବଂ ଉତ୍ତର ଦିଏ। ସ୍ୱାଭାବିକ ଭାବେ ଚାଟ୍ କରନ୍ତୁ।",
+    "badge": "ବହୁଭାଷିକ ସମର୍ଥନ"
+  },
+  "video": {
+    "label": "ଦେଖନ୍ତୁ",
+    "title": "D23 AI କାର୍ଯ୍ୟରେ ଦେଖନ୍ତୁ",
+    "videoTitle": "D23 AI",
+    "videoSubtitle": "ଲଞ୍ଚ ଭିଡିଓ"
+  },
+  "features": {
+    "label": "ବୈଶିଷ୍ଟ୍ୟ",
+    "title1": "ଆପଣଙ୍କୁ ଯାହା ଦରକାର,",
+    "title2": "ଆପଣଙ୍କ ଭାଷାରେ",
+    "languages": {
+      "title": "୧୧+ ଭାଷା",
+      "desc": "ହିନ୍ଦୀ, ତାମିଲ, ତେଲୁଗୁ, ବଙ୍ଗାଳୀ ଏବଂ ଆହୁରି"
+    },
+    "voice": {
+      "title": "ଭଏସ୍ AI",
+      "desc": "ସ୍ୱାଭାବିକ ଭାବେ କୁହନ୍ତୁ, ଭଏସ୍ ଉତ୍ତର ପାଆନ୍ତୁ"
+    },
+    "images": {
+      "title": "AI ଛବି",
+      "desc": "ତୁରନ୍ତ ଆଶ୍ଚର୍ଯ୍ୟଜନକ ଭିଜୁଆଲ୍ ତିଆରି କରନ୍ତୁ"
+    },
+    "factCheck": {
+      "title": "ଫ୍ୟାକ୍ଟ ଚେକ୍",
+      "desc": "ଯେକୌଣସି ସନ୍ଦେଶ ତୁରନ୍ତ ଯାଞ୍ଚ କରନ୍ତୁ"
+    },
+    "stickers": {
+      "title": "ଷ୍ଟିକର୍",
+      "desc": "କଷ୍ଟମ୍ ହ୍ୱାଟ୍ସଆପ୍ ଷ୍ଟିକର୍ ତିଆରି କରନ୍ତୁ"
+    },
+    "games": {
+      "title": "ଖେଳ",
+      "desc": "ହ୍ୱାଟ୍ସଆପ୍ରେ Wordle ଏବଂ ଆହୁରି ଖେଳନ୍ତୁ"
+    }
+  },
+  "showcase": {
+    "label": "ଶୋକେସ୍",
+    "title": "କଣ ସମ୍ଭବ ଦେଖନ୍ତୁ",
+    "multilingual": "ବହୁଭାଷିକ",
+    "languagesCount": "୧୧+ ଭାଷା"
+  },
+  "faq": {
+    "label": "ପ୍ରଶ୍ନୋତ୍ତର",
+    "title": "ପ୍ରଶ୍ନ",
+    "titleHighlight": "ଅଛି?",
+    "q1": "D23 AI କଣ?",
+    "a1": "ତୁରନ୍ତ ଉତ୍ତର ପାଇଁ ୧୧+ ଭାଷାରେ ବିଶେଷଜ୍ଞ ଏକ ବୁଦ୍ଧିମାନ ହ୍ୱାଟ୍ସଆପ୍ ବଟ୍।",
+    "q2": "କେଉଁ ଭାଷା ସମର୍ଥିତ?",
+    "a2": "ହିନ୍ଦୀ, ମରାଠୀ, ବଙ୍ଗାଳୀ, ତାମିଲ, ତେଲୁଗୁ, କନ୍ନଡ଼, ମାଲାୟାଲମ, ଗୁଜରାଟୀ, ପଞ୍ଜାବୀ, ଓଡ଼ିଆ ଏବଂ ଆହୁରି।",
+    "q3": "ଏହା କଣ ମାଗଣା?",
+    "a3": "ହଁ! ଆପଣ କିଛି ନ ଦେଇ ଚାଟ୍ ଆରମ୍ଭ କରିପାରିବେ।",
+    "q4": "ଏହା କଣ ଫ୍ୟାକ୍ଟ-ଚେକ୍ କରିପାରେ?",
+    "a4": "ଯାଞ୍ଚ ପାଇଁ ଯେକୌଣସି ସନ୍ଦେଶ ଫରୱାର୍ଡ କରନ୍ତୁ। D23 AI ମିଥ୍ୟା ତଥ୍ୟ ଚିହ୍ନଟ କରିବାକୁ ନିର୍ଭରଯୋଗ୍ୟ ଉତ୍ସ ଖୋଜେ।"
+  },
+  "cta": {
+    "title": "D23 AI ଚେଷ୍ଟା କରିବାକୁ ପ୍ରସ୍ତୁତ?",
+    "subtitle": "ହଜାର ହଜାର ଉପଭୋକ୍ତାଙ୍କ ସହିତ ଯୋଗ ଦିଅନ୍ତୁ ଯେଉଁମାନେ ନିଜ ଭାଷାରେ ତୁରନ୍ତ ଉତ୍ତର ପାଇଁ D23 AI ବ୍ୟବହାର କରୁଛନ୍ତି।",
+    "button1": "ଚାଟ୍ ଆରମ୍ଭ କରନ୍ତୁ",
+    "button2": "ୱେବ୍ ଭର୍ସନ୍ ଚେଷ୍ଟା କରନ୍ତୁ"
+  },
+  "footer": {
+    "tagline": "ଆପଣଙ୍କ ବହୁଭାଷୀ WhatsApp AI।",
+    "button": "D23 AI ସହିତ କଥା ହୁଅନ୍ତୁ",
+    "copyright": "© ୨୦୨୫ D23 AI। ପ୍ରତ୍ୟେକ ଭାଷା ପାଇଁ ନିର୍ମିତ।"
+  },
+  "howItWorks": {
+    "label": "How It Works",
+    "title": "Get started in",
+    "titleHighlight": "3 simple steps",
+    "step1Title": "Save Our Number",
+    "step1Desc": "Add D23 AI to your WhatsApp contacts",
+    "step2Title": "Send a Message",
+    "step2Desc": "Ask anything in Hindi, Tamil, Telugu or any language",
+    "step3Title": "Get Instant Answers",
+    "step3Desc": "AI responds in your language in under 2 seconds"
+  },
+  "testimonials": {
+    "label": "Testimonials",
+    "title": "Loved by users across",
+    "titleHighlight": "the world",
+    "t1Quote": "D23 AI understands my Hindi perfectly. It's like talking to a friend who knows everything!",
+    "t1Name": "Priya Sharma",
+    "t1City": "Delhi",
+    "t2Quote": "தமிழில் AI பயன்படுத்துவது மிகவும் எளிது. I use it daily for translations and recipes.",
+    "t2Name": "Karthik R.",
+    "t2City": "Chennai",
+    "t3Quote": "My grandmother uses it to fact-check WhatsApp forwards. The Gujarati support is amazing!",
+    "t3Name": "Ankit Patel",
+    "t3City": "Ahmedabad",
+    "t4Quote": "Best multilingual AI assistant. The sticker maker is my kids' favorite feature!",
+    "t4Name": "Sneha Reddy",
+    "t4City": "Hyderabad",
+    "t5Quote": "মাতৃভাষায় AI ব্যবহার করতে পেরে খুবই ভালো লাগছে। Voice feature is incredible!",
+    "t5Name": "Rahul Das",
+    "t5City": "Kolkata",
+    "t6Quote": "I switched from ChatGPT because D23 understands Marathi context and culture perfectly.",
+    "t6Name": "Meera Joshi",
+    "t6City": "Pune"
+  },
+  "comparison": {
+    "label": "Why D23 AI",
+    "title": "See how D23 AI",
+    "titleHighlight": "compares",
+    "feature": "Feature",
+    "d23": "D23 AI",
+    "chatgpt": "ChatGPT",
+    "googleTranslate": "Google Translate",
+    "indianLanguages": "11+ Languages",
+    "whatsappNative": "WhatsApp Native",
+    "voiceAI": "Voice AI",
+    "imageGen": "AI Image Generation",
+    "stickers": "Custom Stickers",
+    "games": "Games & Fun",
+    "free": "Free to Use"
+  },
+  "security": {
+    "label": "Security",
+    "title": "Your privacy is",
+    "titleHighlight": "our priority",
+    "encryption": "End-to-End Encryption",
+    "encryptionDesc": "All your conversations are secured with industry-standard encryption protocols.",
+    "noDataSharing": "No Data Sharing",
+    "noDataSharingDesc": "We never sell or share your personal data with third parties. Your data stays yours.",
+    "whatsappSecurity": "WhatsApp Security",
+    "whatsappSecurityDesc": "Built on WhatsApp's trusted platform with additional security layers for AI interactions."
+  }
+}

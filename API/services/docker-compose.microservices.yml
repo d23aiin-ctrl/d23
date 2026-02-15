@@ -1,0 +1,267 @@
+# OhGrt Microservices - Docker Compose
+#
+# Usage:
+#   docker-compose -f docker-compose.microservices.yml up -d
+#
+# Individual service:
+#   docker-compose -f docker-compose.microservices.yml up astrology-service -d
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # INFRASTRUCTURE
+  # ===========================================================================
+
+  redis:
+    image: redis:7-alpine
+    container_name: ohgrt-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ohgrt-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: ohgrt-postgres
+    environment:
+      POSTGRES_USER: ohgrt
+      POSTGRES_PASSWORD: ohgrt_secret
+      POSTGRES_DB: ohgrt
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ohgrt"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ohgrt-network
+
+  # ===========================================================================
+  # API GATEWAY
+  # ===========================================================================
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: ohgrt-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - REDIS_URL=redis://redis:6379
+      - AUTH_SERVICE_URL=http://auth-service:8001
+      - CHAT_SERVICE_URL=http://chat-service:8002
+      - ASTROLOGY_SERVICE_URL=http://astrology-service:8003
+      - TRAVEL_SERVICE_URL=http://travel-service:8004
+      - GOVERNMENT_SERVICE_URL=http://government-service:8005
+      - UTILITY_SERVICE_URL=http://utility-service:8006
+      - FINANCE_SERVICE_URL=http://finance-service:8007
+      - JOBS_SERVICE_URL=http://jobs-service:8008
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # CORE SERVICES
+  # ===========================================================================
+
+  auth-service:
+    build: ./auth-service
+    container_name: ohgrt-auth
+    ports:
+      - "8001:8001"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://ohgrt:ohgrt_secret@postgres:5432/ohgrt
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key-change-me}
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  chat-service:
+    build: ./chat-service
+    container_name: ohgrt-chat
+    ports:
+      - "8002:8002"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://ohgrt:ohgrt_secret@postgres:5432/ohgrt
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - ASTROLOGY_SERVICE_URL=http://astrology-service:8003
+      - TRAVEL_SERVICE_URL=http://travel-service:8004
+      - GOVERNMENT_SERVICE_URL=http://government-service:8005
+      - UTILITY_SERVICE_URL=http://utility-service:8006
+      - FINANCE_SERVICE_URL=http://finance-service:8007
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # DOMAIN SERVICES
+  # ===========================================================================
+
+  astrology-service:
+    build: ./astrology-service
+    container_name: ohgrt-astrology
+    ports:
+      - "8003:8003"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  travel-service:
+    build: ./travel-service
+    container_name: ohgrt-travel
+    ports:
+      - "8004:8004"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  government-service:
+    build: ./government-service
+    container_name: ohgrt-government
+    ports:
+      - "8005:8005"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  utility-service:
+    build: ./utility-service
+    container_name: ohgrt-utility
+    ports:
+      - "8006:8006"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY:-}
+      - NEWS_API_KEY=${NEWS_API_KEY:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  finance-service:
+    build: ./finance-service
+    container_name: ohgrt-finance
+    ports:
+      - "8007:8007"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  jobs-service:
+    build: ./jobs-service
+    container_name: ohgrt-jobs
+    ports:
+      - "8008:8008"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+      - DATABASE_URL=postgresql://ohgrt:ohgrt_secret@postgres:5432/ohgrt
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # NOTIFICATION SERVICE
+  # ===========================================================================
+
+  notification-service:
+    build: ./notification-service
+    container_name: ohgrt-notification
+    ports:
+      - "8012:8012"
+    environment:
+      - ENVIRONMENT=development
+      - REDIS_URL=redis://redis:6379
+      - WHATSAPP_TOKEN=${WHATSAPP_TOKEN:-}
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASSWORD=${SMTP_PASSWORD:-}
+    depends_on:
+      redis:
+        condition: service_healthy
+    networks:
+      - ohgrt-network
+    restart: unless-stopped
+
+# ===========================================================================
+# NETWORKS
+# ===========================================================================
+
+networks:
+  ohgrt-network:
+    driver: bridge
+    name: ohgrt-network
+
+# ===========================================================================
+# VOLUMES
+# ===========================================================================
+
+volumes:
+  redis_data:
+    name: ohgrt-redis-data
+  postgres_data:
+    name: ohgrt-postgres-data
