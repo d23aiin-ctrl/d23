@@ -29,6 +29,11 @@
   --chart-3: #8b5cf6;
   --chart-4: #a78bfa;
   --chart-5: #818cf8;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.05);
+  --shadow-md: 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 2px 4px rgba(0,0,0,0.04), 0 12px 32px rgba(0,0,0,0.08);
+  --shadow-xl: 0 4px 8px rgba(0,0,0,0.06), 0 16px 40px rgba(0,0,0,0.1);
+  --shadow-violet: 0 2px 4px rgba(124,58,237,0.08), 0 8px 24px rgba(124,58,237,0.12);
   --radius: 0.625rem;
   --sidebar: #FAFAFA;
   --sidebar-foreground: #171717;
@@ -125,6 +130,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  h1, h2, h3, h4 { letter-spacing: -0.02em; }
+  h1 { line-height: 1.1; }
+  h2 { line-height: 1.2; }
 }
 
 @keyframes floaty {
@@ -245,3 +253,10 @@
 .scrollbar-track-transparent::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* WhatsApp button gentle glow */
+@keyframes whatsappPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(37,211,102,0.3); }
+  50% { box-shadow: 0 6px 20px rgba(37,211,102,0.5); }
+}
+.animate-whatsapp-pulse { animation: whatsappPulse 3s ease-in-out infinite; }

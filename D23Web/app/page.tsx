@@ -13,7 +13,7 @@ const useHydrated = () => {
   return hydrated
 }
 
-import { Sparkles, Mic, ShieldCheck, Sticker, Gamepad2, MessageCircle, ChevronDown, ArrowRight, Play, Languages, ImageIcon, Zap, Globe, Check, X as XIcon, Lock, Star, Phone } from "lucide-react"
+import { Sparkles, Mic, ShieldCheck, Sticker, Gamepad2, MessageCircle, ChevronDown, ArrowRight, Play, Languages, ImageIcon, Zap, Globe, Check, X as XIcon, Lock, Star, Phone, Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { LanguageProvider, useLanguage, useTranslations, languages as supportedLanguages } from "@/lib/i18n/LanguageContext"
 import { LanguageSwitcher, LanguageBar } from "@/components/LanguageSwitcher"
@@ -96,7 +96,7 @@ function LanguageMarquee() {
   const languages = content.languages;
 
   return (
-    <div className="relative w-full overflow-hidden py-8 bg-gradient-to-r from-violet-50/30 via-neutral-50/80 to-indigo-50/30 backdrop-blur-sm border-y border-neutral-100">
+    <div className="relative w-full overflow-hidden py-8 bg-gradient-to-r from-neutral-50/80 via-white to-neutral-50/80 backdrop-blur-sm border-y border-neutral-100">
       <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10" />
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10" />
       <div className="flex animate-marquee whitespace-nowrap">
@@ -120,7 +120,7 @@ function LanguageMarquee() {
 // ============== MAGNETIC BUTTON ==============
 function MagneticButton({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn("relative transition-transform duration-200 hover:scale-105", className)}>
+    <div className={cn("relative transition-all duration-300 hover:scale-[1.03] hover:-translate-y-0.5", className)}>
       {children}
     </div>
   )
@@ -227,8 +227,8 @@ function PremiumCard({ children, className = "" }: { children: React.ReactNode; 
   return (
     <div className={cn(
       "bg-white rounded-2xl border border-neutral-200/80 transition-all duration-300",
-      "shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]",
-      "hover:shadow-[0_2px_4px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.08)]",
+      "shadow-[var(--shadow-md)]",
+      "hover:shadow-[var(--shadow-lg)]",
       "hover:border-neutral-300/80",
       className
     )}>
@@ -239,7 +239,7 @@ function PremiumCard({ children, className = "" }: { children: React.ReactNode; 
 
 // ============== SECTION DIVIDER ==============
 function SectionDivider() {
-  return <div className="h-px bg-gradient-to-r from-transparent via-violet-200/50 to-transparent" />
+  return <div className="h-px bg-gradient-to-r from-transparent via-neutral-200/80 to-transparent" />
 }
 
 // ============== ANIMATED COUNTER ==============
@@ -565,6 +565,7 @@ function PhoneMockup() {
 // ============== HEADER ==============
 function Header() {
   const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const t = useTranslations()
 
   useEffect(() => {
@@ -574,40 +575,81 @@ function Header() {
   }, [])
 
   return (
-    <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-white/80 backdrop-blur-xl border-b border-neutral-200 shadow-sm" : "")}>
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <Link href="/" scroll={true} className="flex items-center gap-2 cursor-pointer z-10">
-            <Image src="/d23ai-logo-v8.svg" alt="D23" width={40} height={40} className="cursor-pointer hover:scale-110 transition-transform" priority />
-          </Link>
+    <>
+      <header className={cn("fixed top-0 left-0 right-0 z-50 transition-all duration-500", scrolled ? "bg-white/90 backdrop-blur-xl border-b border-neutral-200/80 shadow-[var(--shadow-sm)]" : "bg-white/60 backdrop-blur-md")}>
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" scroll={true} className="flex items-center gap-2 cursor-pointer z-10">
+              <Image src="/d23-logo-icon.png" alt="D23" width={40} height={40} className="cursor-pointer hover:scale-110 transition-transform" priority />
+              <span className="text-xl font-bold">D23 <GradientText>AI</GradientText></span>
+            </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="#features" className="relative text-sm text-neutral-500 hover:text-neutral-900 transition-colors group">
-              {t.nav.features}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link href="/about" className="relative text-sm text-neutral-500 hover:text-neutral-900 transition-colors group">
-              {t.nav.about}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-300" />
-            </Link>
-            <Link href="#contact" className="relative text-sm text-neutral-500 hover:text-neutral-900 transition-colors group">
-              {t.nav.contact}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-300" />
-            </Link>
-          </nav>
+            <nav className="hidden md:flex items-center gap-8">
+              <Link href="#features" className="relative text-sm text-neutral-500 hover:text-neutral-900 transition-colors group">
+                {t.nav.features}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-300" />
+              </Link>
+              <Link href="/about" className="relative text-sm text-neutral-500 hover:text-neutral-900 transition-colors group">
+                {t.nav.about}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-300" />
+              </Link>
+              <Link href="#contact" className="relative text-sm text-neutral-500 hover:text-neutral-900 transition-colors group">
+                {t.nav.contact}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-violet-500 to-indigo-500 group-hover:w-full transition-all duration-300" />
+              </Link>
+            </nav>
 
-          <div className="flex items-center gap-4">
-            <LanguageSwitcher variant="pill" />
-            <MagneticButton>
-              <Link href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F" target="_blank" className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium shadow-lg shadow-violet-500/15 hover:shadow-violet-500/30 transition-shadow">
+            <div className="flex items-center gap-4">
+              <LanguageSwitcher variant="pill" />
+              <MagneticButton className="hidden md:block">
+                <Link href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F" target="_blank" className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-sm font-medium shadow-lg shadow-violet-500/15 hover:shadow-violet-500/30 transition-shadow">
+                  <Zap className="h-4 w-4" />
+                  {t.nav.getStarted}
+                </Link>
+              </MagneticButton>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-xl border border-neutral-200 bg-white/80 backdrop-blur-sm"
+                aria-label="Toggle menu"
+              >
+                <div className="relative w-5 h-4 flex flex-col justify-between">
+                  <span className={cn("block h-0.5 w-5 bg-neutral-700 rounded-full transition-all duration-300 origin-center", mobileMenuOpen && "rotate-45 translate-y-[7px]")} />
+                  <span className={cn("block h-0.5 w-5 bg-neutral-700 rounded-full transition-all duration-300", mobileMenuOpen && "opacity-0 scale-0")} />
+                  <span className={cn("block h-0.5 w-5 bg-neutral-700 rounded-full transition-all duration-300 origin-center", mobileMenuOpen && "-rotate-45 -translate-y-[7px]")} />
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed top-[72px] left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-xl border-b border-neutral-200 shadow-lg"
+          >
+            <nav className="max-w-7xl mx-auto px-6 py-6 flex flex-col gap-4">
+              <Link href="#features" onClick={() => setMobileMenuOpen(false)} className="text-base text-neutral-700 hover:text-neutral-900 py-2 transition-colors">{t.nav.features}</Link>
+              <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-base text-neutral-700 hover:text-neutral-900 py-2 transition-colors">{t.nav.about}</Link>
+              <Link href="#contact" onClick={() => setMobileMenuOpen(false)} className="text-base text-neutral-700 hover:text-neutral-900 py-2 transition-colors">{t.nav.contact}</Link>
+              <Link
+                href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
+                target="_blank"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium shadow-lg shadow-violet-500/15 mt-2"
+              >
                 <Zap className="h-4 w-4" />
                 {t.nav.getStarted}
               </Link>
-            </MagneticButton>
-          </div>
-        </div>
-      </div>
-    </header>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
@@ -644,29 +686,29 @@ function HeroSection() {
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-white">
         <div className="absolute inset-0 opacity-30">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.15),rgba(255,255,255,0))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(139,92,246,0.08),rgba(255,255,255,0))]" />
         </div>
-        <div className="absolute top-20 left-[10%] w-[500px] h-[500px] bg-gradient-to-r from-violet-200/40 to-indigo-200/30 rounded-full blur-[100px] animate-[float1_20s_ease-in-out_infinite]" />
-        <div className="absolute bottom-20 right-[10%] w-[400px] h-[400px] bg-gradient-to-r from-blue-200/30 to-indigo-200/20 rounded-full blur-[100px] animate-[float2_15s_ease-in-out_infinite]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
+        <div className="absolute top-20 left-[10%] w-[500px] h-[500px] bg-gradient-to-r from-violet-200/30 to-fuchsia-200/20 rounded-full blur-[100px] animate-[float1_20s_ease-in-out_infinite]" />
+        <div className="absolute bottom-20 right-[10%] w-[400px] h-[400px] bg-gradient-to-r from-amber-200/20 to-rose-200/15 rounded-full blur-[100px] animate-[float2_15s_ease-in-out_infinite]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
       </div>
 
       <motion.div style={{ y, opacity, scale }} className="relative z-10 w-full max-w-7xl mx-auto px-6 pt-28 pb-12">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-4 items-center">
           <div className="text-center lg:text-left">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-300/60 bg-gradient-to-r from-violet-100/80 to-indigo-100/80 backdrop-blur-sm mb-6 shadow-sm">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neutral-200 bg-white/80 backdrop-blur-sm mb-6 shadow-sm">
               <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2, repeat: Infinity }} className="relative">
                 <span className="flex h-2 w-2 rounded-full bg-green-500" />
                 <span className="absolute inset-0 h-2 w-2 rounded-full bg-green-500 animate-ping" />
               </motion.div>
-              <span className="text-sm font-medium text-violet-700">{t.hero.badge}</span>
+              <span className="text-sm font-medium text-neutral-700">{t.hero.badge}</span>
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 mb-6 leading-[1.1] tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-neutral-900 mb-6">
               <span className="whitespace-nowrap"><TextReveal>{content.hero.title}</TextReveal></span>
               <br />
               <span className="relative">
-                <span className="text-neutral-400">{content.hero.subtitle} </span>
+                <span className="text-neutral-500">{content.hero.subtitle} </span>
                 <span className="relative">
                   <RotatingWord words={content.hero.rotatingWords} />
                   <motion.span className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-indigo-500 rounded-full" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 1, duration: 0.8 }} />
@@ -674,7 +716,7 @@ function HeroSection() {
               </span>
             </h1>
 
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-lg md:text-xl text-neutral-500 max-w-xl mx-auto lg:mx-0 mb-8">{content.hero.description}</motion.p>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="text-lg md:text-xl text-neutral-600 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-8">{content.hero.description}</motion.p>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mb-8">
               <MagneticButton>
@@ -695,25 +737,25 @@ function HeroSection() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }} className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
-              <div className="relative group cursor-pointer">
-                <div className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-white border border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.04),0_8px_20px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-all">
+              <div className="relative group cursor-pointer hover:-translate-y-0.5 transition-all">
+                <div className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white border border-neutral-200 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-neutral-300 transition-all">
                   <svg className="w-7 h-7 text-neutral-900" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
                   <div className="text-left">
                     <p className="text-[9px] text-neutral-400 uppercase tracking-wider">{t.hero.comingSoon}</p>
                     <p className="text-neutral-900 font-medium text-sm">{t.hero.appStore}</p>
                   </div>
                 </div>
-                <span className="absolute -top-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 text-[9px] text-white font-bold shadow-lg">{t.hero.soon}</span>
+                <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-neutral-900 text-[10px] text-white font-bold shadow-lg">{t.hero.soon}</span>
               </div>
-              <div className="relative group cursor-pointer">
-                <div className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-white border border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.06)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.04),0_8px_20px_rgba(0,0,0,0.08)] hover:border-neutral-300 transition-all">
+              <div className="relative group cursor-pointer hover:-translate-y-0.5 transition-all">
+                <div className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white border border-neutral-200 shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] hover:border-neutral-300 transition-all">
                   <svg className="w-7 h-7 text-neutral-900" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
                   <div className="text-left">
                     <p className="text-[9px] text-neutral-400 uppercase tracking-wider">{t.hero.comingSoon}</p>
                     <p className="text-neutral-900 font-medium text-sm">{t.hero.playStore}</p>
                   </div>
                 </div>
-                <span className="absolute -top-1.5 -right-1.5 px-2 py-0.5 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 text-[9px] text-white font-bold shadow-lg">{t.hero.soon}</span>
+                <span className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-neutral-900 text-[10px] text-white font-bold shadow-lg">{t.hero.soon}</span>
               </div>
             </motion.div>
           </div>
@@ -724,12 +766,12 @@ function HeroSection() {
         <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2 }} className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
           {stats.map((stat, i) => (
             <motion.div key={stat.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.3 + i * 0.1 }} whileHover={{ scale: 1.02, y: -2 }} className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-indigo-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative p-6 rounded-2xl bg-white border border-neutral-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.08)] hover:border-neutral-300/80 transition-all overflow-hidden">
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 to-indigo-500" />
-                <span className="text-2xl mb-2 block">{stat.icon}</span>
-                <div className="text-3xl md:text-4xl font-bold text-neutral-900 mb-1">{stat.prefix || ""}<AnimatedCounter value={stat.value} suffix={stat.suffix} /></div>
-                <div className="text-sm text-neutral-400">{stat.label}</div>
+              <div className="absolute inset-0 bg-neutral-500/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative p-8 rounded-2xl bg-white border border-neutral-200/80 shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] hover:border-neutral-300/80 transition-all overflow-hidden">
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-neutral-200 via-violet-300/60 to-neutral-200" />
+                <span className="text-3xl mb-3 block">{stat.icon}</span>
+                <div className="text-3xl md:text-4xl font-extrabold text-neutral-900 mb-1">{stat.prefix || ""}<AnimatedCounter value={stat.value} suffix={stat.suffix} /></div>
+                <div className="text-sm text-neutral-500 font-medium">{stat.label}</div>
               </div>
             </motion.div>
           ))}
@@ -754,16 +796,16 @@ function HowItWorksSection() {
 
   const steps = [
     { icon: <Phone className="h-7 w-7 text-white" />, color: "from-violet-500 to-purple-500", titleKey: "step1Title", descKey: "step1Desc", number: "1" },
-    { icon: <MessageCircle className="h-7 w-7 text-white" />, color: "from-indigo-500 to-blue-500", titleKey: "step2Title", descKey: "step2Desc", number: "2" },
-    { icon: <Sparkles className="h-7 w-7 text-white" />, color: "from-blue-500 to-cyan-500", titleKey: "step3Title", descKey: "step3Desc", number: "3" },
+    { icon: <MessageCircle className="h-7 w-7 text-white" />, color: "from-emerald-500 to-teal-500", titleKey: "step2Title", descKey: "step2Desc", number: "2" },
+    { icon: <Sparkles className="h-7 w-7 text-white" />, color: "from-amber-500 to-orange-500", titleKey: "step3Title", descKey: "step3Desc", number: "3" },
   ]
 
   return (
-    <section ref={ref} className="py-24 px-6 bg-gradient-to-b from-violet-50/30 via-white to-white">
+    <section ref={ref} className="py-24 px-6 bg-gradient-to-b from-neutral-50/50 via-white to-white">
       <div className="max-w-5xl mx-auto">
         <StaggerContainer className="text-center mb-20">
           <StaggerItem>
-            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">{t.howItWorks?.label ?? "How It Works"}</span>
+            <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{t.howItWorks?.label ?? "How It Works"}</span>
           </StaggerItem>
           <StaggerItem>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mt-4">
@@ -773,7 +815,7 @@ function HowItWorksSection() {
         </StaggerContainer>
 
         <div className="grid grid-cols-3 gap-4 md:gap-8 relative">
-          <div className="hidden md:block absolute top-10 md:top-[4.5rem] left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-violet-300 via-indigo-300 to-blue-300" />
+          <div className="hidden md:block absolute top-10 md:top-[4.5rem] left-[20%] right-[20%] h-[2px] bg-gradient-to-r from-neutral-200 via-neutral-300 to-neutral-200" />
 
           {steps.map((step, i) => (
             <motion.div
@@ -783,16 +825,16 @@ function HowItWorksSection() {
               transition={{ delay: i * 0.2 }}
               className="relative text-center"
             >
-              <div className="bg-white rounded-2xl p-4 md:p-6 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] border border-neutral-200/80">
+              <div className="bg-white rounded-2xl p-4 md:p-6 shadow-[var(--shadow-md)] border border-neutral-200/80">
                 <div className="relative z-10 inline-block mb-4 md:mb-6">
-                  <div className="absolute inset-0 bg-gradient-to-br from-violet-400/20 to-indigo-400/20 rounded-2xl blur-xl scale-150" />
+                  <div className="absolute inset-0 bg-neutral-400/10 rounded-2xl blur-xl scale-150" />
                   <div className={cn("relative w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl md:rounded-2xl bg-gradient-to-br flex items-center justify-center shadow-lg", step.color)}>
                     <span className="[&>svg]:w-5 [&>svg]:h-5 md:[&>svg]:w-7 md:[&>svg]:h-7 lg:[&>svg]:w-8 lg:[&>svg]:h-8">{step.icon}</span>
                   </div>
-                  <span className="absolute -top-1.5 -right-1.5 md:-top-2 md:-right-2 w-5 h-5 md:w-7 md:h-7 rounded-full bg-white border-2 border-violet-500 text-violet-600 text-[10px] md:text-xs font-bold flex items-center justify-center shadow-sm">{step.number}</span>
+                  <span className="absolute -top-1.5 -right-1.5 md:-top-2 md:-right-2 w-5 h-5 md:w-7 md:h-7 rounded-full bg-white border-2 border-neutral-300 text-neutral-700 text-[10px] md:text-xs font-bold flex items-center justify-center shadow-sm">{step.number}</span>
                 </div>
                 <h3 className="text-sm md:text-xl font-semibold text-neutral-900 mb-1 md:mb-2">{(t.howItWorks as any)?.[step.titleKey] ?? step.titleKey}</h3>
-                <p className="text-xs md:text-base text-neutral-500 hidden sm:block">{(t.howItWorks as any)?.[step.descKey] ?? step.descKey}</p>
+                <p className="text-xs md:text-base text-neutral-600 hidden sm:block">{(t.howItWorks as any)?.[step.descKey] ?? step.descKey}</p>
               </div>
             </motion.div>
           ))}
@@ -914,12 +956,12 @@ function AnimatedDemoShowcase() {
   return (
     <section ref={ref} className="py-24 px-6 overflow-hidden relative">
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-gradient-to-r from-violet-100/40 to-indigo-100/30 rounded-full blur-[100px]" />
-        <div className="absolute bottom-20 right-[15%] w-[350px] h-[350px] bg-gradient-to-r from-blue-100/30 to-violet-100/20 rounded-full blur-[100px]" />
+        <div className="absolute top-20 left-[10%] w-[400px] h-[400px] bg-gradient-to-r from-violet-100/30 to-purple-100/20 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 right-[15%] w-[350px] h-[350px] bg-gradient-to-r from-rose-100/20 to-amber-100/15 rounded-full blur-[100px]" />
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-conic from-violet-100/30 via-transparent to-indigo-100/30 blur-3xl"
+          className="absolute -top-1/2 -right-1/2 w-full h-full bg-gradient-conic from-violet-100/20 via-transparent to-rose-100/15 blur-3xl"
         />
       </div>
 
@@ -946,7 +988,7 @@ function AnimatedDemoShowcase() {
             </h2>
           </StaggerItem>
           <StaggerItem>
-            <p className="text-neutral-500 mt-4 max-w-xl mx-auto text-lg">
+            <p className="text-neutral-600 mt-4 max-w-xl mx-auto text-lg">
               Click on any feature to see how D23 AI responds in real-time
             </p>
           </StaggerItem>
@@ -969,8 +1011,8 @@ function AnimatedDemoShowcase() {
                 className={cn(
                   "w-full flex items-center gap-4 p-4 rounded-2xl border transition-all duration-300 text-left group",
                   i === activeDemo
-                    ? "bg-gradient-to-r from-violet-50 to-indigo-50 border-violet-300 ring-1 ring-violet-200 shadow-[0_2px_4px_rgba(0,0,0,0.04),0_8px_24px_rgba(124,58,237,0.12)]"
-                    : "bg-white border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)] hover:border-neutral-300 hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.06)]"
+                    ? "bg-gradient-to-r from-violet-50 to-indigo-50 border-violet-300 ring-1 ring-violet-200 shadow-[var(--shadow-violet)]"
+                    : "bg-white border-neutral-200 shadow-[var(--shadow-sm)] hover:border-neutral-300 hover:shadow-[var(--shadow-md)]"
                 )}
               >
                 <div className={cn(
@@ -1019,7 +1061,7 @@ function AnimatedDemoShowcase() {
                 )}
               />
 
-              <div className="relative bg-zinc-900/90 rounded-3xl border border-neutral-300/60 overflow-hidden backdrop-blur-xl shadow-[0_4px_8px_rgba(0,0,0,0.06),0_16px_40px_rgba(0,0,0,0.12)]">
+              <div className="relative bg-zinc-900/90 rounded-3xl border border-neutral-300/60 overflow-hidden backdrop-blur-xl shadow-[var(--shadow-xl)]">
                 <div className={cn("p-4 flex items-center gap-3 bg-gradient-to-r", currentDemo.color)}>
                   <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center backdrop-blur-sm">
                     <span className="text-2xl">{currentDemo.icon}</span>
@@ -1161,7 +1203,7 @@ function FeaturesSection() {
   const t = useTranslations()
   const features = [
     { id: "languages", icon: <Languages className="h-6 w-6" />, titleKey: "languages", color: "from-violet-500 to-purple-500" },
-    { id: "voice", icon: <Mic className="h-6 w-6" />, titleKey: "voice", color: "from-indigo-500 to-violet-500" },
+    { id: "voice", icon: <Mic className="h-6 w-6" />, titleKey: "voice", color: "from-rose-500 to-pink-500" },
     { id: "images", icon: <ImageIcon className="h-6 w-6" />, titleKey: "images", color: "from-orange-500 to-red-500" },
     { id: "factCheck", icon: <ShieldCheck className="h-6 w-6" />, titleKey: "factCheck", color: "from-cyan-500 to-blue-500" },
     { id: "stickers", icon: <Sticker className="h-6 w-6" />, titleKey: "stickers", color: "from-green-500 to-emerald-500" },
@@ -1169,11 +1211,11 @@ function FeaturesSection() {
   ]
 
   return (
-    <section id="features" className="py-24 px-6">
+    <section id="features" className="py-24 px-6 bg-gradient-to-b from-neutral-50/40 via-white to-white">
       <SectionDivider />
       <div className="max-w-6xl mx-auto pt-8">
         <StaggerContainer className="text-center mb-20">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">{t.features.label}</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{t.features.label}</span></StaggerItem>
           <StaggerItem><h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mt-4">{t.features.title1}<br /><GradientText>{t.features.title2}</GradientText></h2></StaggerItem>
         </StaggerContainer>
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1183,13 +1225,13 @@ function FeaturesSection() {
               <StaggerItem key={feature.id}>
                 <TiltCard className="h-full">
                   <PremiumCard className="h-full">
-                    <div className="p-6 h-full">
+                    <div className="p-8 h-full">
                       <div className="relative inline-block mb-5">
                         <div className={cn("absolute inset-0 rounded-2xl blur-xl opacity-30 scale-150 bg-gradient-to-br", feature.color)} />
                         <motion.div whileHover={{ scale: 1.1, rotate: 5 }} className={cn("relative w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br text-white", feature.color)}>{feature.icon}</motion.div>
                       </div>
                       <h3 className="text-xl font-semibold text-neutral-900 mb-2">{featureData?.title}</h3>
-                      <p className="text-neutral-500">{featureData?.desc}</p>
+                      <p className="text-neutral-600">{featureData?.desc}</p>
                     </div>
                   </PremiumCard>
                 </TiltCard>
@@ -1206,6 +1248,15 @@ function FeaturesSection() {
 function TestimonialsSection() {
   const t = useTranslations()
 
+  const avatarGradients = [
+    "from-violet-500 to-indigo-500",
+    "from-emerald-500 to-teal-500",
+    "from-amber-500 to-orange-500",
+    "from-sky-500 to-blue-500",
+    "from-rose-500 to-pink-500",
+    "from-indigo-500 to-purple-500",
+  ]
+
   const testimonials = [
     { quoteKey: "t1Quote", nameKey: "t1Name", cityKey: "t1City", stars: 5 },
     { quoteKey: "t2Quote", nameKey: "t2Name", cityKey: "t2City", stars: 5 },
@@ -1216,17 +1267,17 @@ function TestimonialsSection() {
   ]
 
   return (
-    <section className="py-24 px-6 bg-gradient-to-b from-indigo-50/25 via-violet-50/20 to-white">
+    <section className="py-24 px-6 bg-gradient-to-b from-neutral-50/50 via-white to-white">
       <div className="max-w-6xl mx-auto">
         <StaggerContainer className="text-center mb-20">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">{t.testimonials?.label ?? "Testimonials"}</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{t.testimonials?.label ?? "Testimonials"}</span></StaggerItem>
           <StaggerItem><h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mt-4">{t.testimonials?.title ?? "Loved by users across"} <GradientText>{t.testimonials?.titleHighlight ?? "India"}</GradientText></h2></StaggerItem>
         </StaggerContainer>
         <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((item) => (
+          {testimonials.map((item, idx) => (
             <StaggerItem key={item.nameKey}>
-              <motion.div whileHover={{ y: -4 }} className="relative bg-white rounded-2xl p-8 border border-neutral-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] hover:shadow-[0_2px_4px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.08)] transition-all h-full flex flex-col">
-                <span className="absolute top-4 right-6 text-7xl text-violet-100 font-serif leading-none select-none pointer-events-none">&ldquo;</span>
+              <motion.div whileHover={{ y: -6 }} className="relative bg-white rounded-2xl p-8 border border-neutral-200/80 shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] hover:border-neutral-300/80 transition-all duration-300 h-full flex flex-col">
+                <span className="absolute top-4 right-6 text-7xl text-neutral-100 font-serif leading-none select-none pointer-events-none">&ldquo;</span>
                 <div className="inline-flex gap-0.5 mb-4 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/50 w-fit">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className={cn("w-4 h-4", i < item.stars ? "text-amber-400 fill-amber-400" : "text-neutral-200")} />
@@ -1234,7 +1285,7 @@ function TestimonialsSection() {
                 </div>
                 <p className="text-neutral-600 flex-1 mb-4 relative z-10">&quot;{(t.testimonials as any)?.[item.quoteKey] ?? ""}&quot;</p>
                 <div className="flex items-center gap-3 pt-4 border-t border-neutral-100">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-500 to-indigo-500 flex items-center justify-center text-white font-semibold text-sm ring-2 ring-white shadow-md">
+                  <div className={cn("w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center text-white font-semibold text-sm ring-2 ring-white shadow-md", avatarGradients[idx % avatarGradients.length])}>
                     {((t.testimonials as any)?.[item.nameKey] ?? "U")[0]}
                   </div>
                   <div>
@@ -1275,19 +1326,20 @@ function ComparisonSection() {
     <section className="py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <StaggerContainer className="text-center mb-20">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">{t.comparison?.label ?? "Why D23 AI"}</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{t.comparison?.label ?? "Why D23 AI"}</span></StaggerItem>
           <StaggerItem><h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mt-4">{t.comparison?.title ?? "See how D23 AI"} <GradientText>{t.comparison?.titleHighlight ?? "compares"}</GradientText></h2></StaggerItem>
         </StaggerContainer>
 
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl border border-neutral-200/80 shadow-[0_2px_4px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.08)] overflow-hidden">
+        {/* Desktop table */}
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="hidden md:block bg-white rounded-3xl border border-neutral-200/80 shadow-[var(--shadow-lg)] overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-neutral-200">
                   <th className="text-left p-4 text-neutral-500 font-medium text-sm">{t.comparison?.feature ?? "Feature"}</th>
-                  <th className="p-4 text-center bg-violet-100/80">
-                    <span className="font-bold text-violet-600">{t.comparison?.d23 ?? "D23 AI"}</span>
-                    <p className="text-[10px] text-violet-400 font-medium mt-0.5">Recommended</p>
+                  <th className="p-4 text-center bg-neutral-50">
+                    <span className="font-bold text-neutral-900">{t.comparison?.d23 ?? "D23 AI"}</span>
+                    <p className="text-[10px] text-violet-500 font-medium mt-0.5">Recommended</p>
                   </th>
                   <th className="p-4 text-center text-neutral-500 font-medium text-sm">{t.comparison?.chatgpt ?? "ChatGPT"}</th>
                   <th className="p-4 text-center text-neutral-500 font-medium text-sm">{t.comparison?.googleTranslate ?? "Google Translate"}</th>
@@ -1295,9 +1347,9 @@ function ComparisonSection() {
               </thead>
               <tbody>
                 {rows.map((row, i) => (
-                  <tr key={row.key} className={cn("border-b border-neutral-100 hover:bg-violet-50/30 transition-colors", i % 2 === 0 ? "bg-neutral-50/50" : "")}>
+                  <tr key={row.key} className={cn("border-b border-neutral-100 hover:bg-neutral-50 transition-colors", i % 2 === 0 ? "bg-neutral-50/50" : "")}>
                     <td className="p-4 text-neutral-700 text-sm font-medium">{(t.comparison as any)?.[row.key] ?? row.key}</td>
-                    <td className="p-4 text-center bg-violet-50/20">{renderCell(row.d23)}</td>
+                    <td className="p-4 text-center bg-neutral-50/30">{renderCell(row.d23)}</td>
                     <td className="p-4 text-center">{renderCell(row.chatgpt)}</td>
                     <td className="p-4 text-center">{renderCell(row.google)}</td>
                   </tr>
@@ -1305,6 +1357,29 @@ function ComparisonSection() {
               </tbody>
             </table>
           </div>
+        </motion.div>
+
+        {/* Mobile card view */}
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="md:hidden space-y-3">
+          {rows.map((row) => (
+            <div key={row.key} className="bg-white rounded-2xl border border-neutral-200/80 shadow-[var(--shadow-sm)] p-4">
+              <p className="text-sm font-semibold text-neutral-900 mb-3">{(t.comparison as any)?.[row.key] ?? row.key}</p>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="flex flex-col items-center gap-1.5">
+                  <span className="text-[10px] font-bold text-violet-600 uppercase">{t.comparison?.d23 ?? "D23 AI"}</span>
+                  {renderCell(row.d23)}
+                </div>
+                <div className="flex flex-col items-center gap-1.5">
+                  <span className="text-[10px] font-medium text-neutral-400 uppercase">{t.comparison?.chatgpt ?? "ChatGPT"}</span>
+                  {renderCell(row.chatgpt)}
+                </div>
+                <div className="flex flex-col items-center gap-1.5">
+                  <span className="text-[10px] font-medium text-neutral-400 uppercase">{t.comparison?.googleTranslate ?? "Google"}</span>
+                  {renderCell(row.google)}
+                </div>
+              </div>
+            </div>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -1316,25 +1391,25 @@ function AboutSection() {
   return (
     <section id="about" className="py-24 px-6 relative overflow-hidden">
       <div className="absolute inset-0 bg-white" />
-      <div className="absolute top-20 left-[5%] w-[400px] h-[400px] bg-gradient-to-r from-violet-100/30 to-indigo-100/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-20 right-[10%] w-[350px] h-[350px] bg-gradient-to-r from-blue-100/20 to-violet-100/15 rounded-full blur-[100px]" />
+      <div className="absolute top-20 left-[5%] w-[400px] h-[400px] bg-gradient-to-r from-violet-100/20 to-purple-100/15 rounded-full blur-[100px]" />
+      <div className="absolute bottom-20 right-[10%] w-[350px] h-[350px] bg-gradient-to-r from-emerald-100/15 to-teal-100/10 rounded-full blur-[100px]" />
       <div className="max-w-6xl mx-auto relative z-10">
         <StaggerContainer className="text-center mb-16">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">About Us</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">About Us</span></StaggerItem>
           <StaggerItem><h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mt-4">Built for the <GradientText>World</GradientText></h2></StaggerItem>
         </StaggerContainer>
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <StaggerContainer>
-            <StaggerItem><p className="text-lg text-neutral-500 mb-6 border-l-[3px] border-violet-400/60 pl-6">D23 AI is a WhatsApp-native AI assistant that breaks language barriers. We believe everyone deserves access to AI in the language they think in.</p></StaggerItem>
-            <StaggerItem><p className="text-lg text-neutral-500 mb-6 border-l-[3px] border-violet-400/60 pl-6">Our mission is to make AI accessible to everyone, in their own language. Whether you speak Hindi, Tamil, Telugu, Bengali, or any of the 11+ languages we support, D23 AI understands and responds naturally.</p></StaggerItem>
-            <StaggerItem><p className="text-lg text-neutral-500 border-l-[3px] border-violet-400/60 pl-6">From fact-checking viral messages to generating images, from playing games to getting instant answers — D23 AI is your intelligent companion on WhatsApp.</p></StaggerItem>
+            <StaggerItem><p className="text-lg text-neutral-600 mb-6 border-l-[3px] border-neutral-300 pl-6">D23 AI is a WhatsApp-native AI assistant that breaks language barriers. We believe everyone deserves access to AI in the language they think in.</p></StaggerItem>
+            <StaggerItem><p className="text-lg text-neutral-600 mb-6 border-l-[3px] border-neutral-300 pl-6">Our mission is to make AI accessible to everyone, in their own language. Whether you speak Hindi, Tamil, Telugu, Bengali, or any of the 11+ languages we support, D23 AI understands and responds naturally.</p></StaggerItem>
+            <StaggerItem><p className="text-lg text-neutral-600 border-l-[3px] border-neutral-300 pl-6">From fact-checking viral messages to generating images, from playing games to getting instant answers — D23 AI is your intelligent companion on WhatsApp.</p></StaggerItem>
           </StaggerContainer>
           <StaggerItem>
             <TiltCard>
               <PremiumCard>
                 <div className="p-8 space-y-6">
                   <div className="flex items-center gap-4"><div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center"><Globe className="h-6 w-6 text-white" /></div><div><p className="text-2xl font-bold text-neutral-900">11+</p><p className="text-neutral-400">Languages Supported</p></div></div>
-                  <div className="flex items-center gap-4"><div className="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center"><MessageCircle className="h-6 w-6 text-white" /></div><div><p className="text-2xl font-bold text-neutral-900">WhatsApp</p><p className="text-neutral-400">Native Experience</p></div></div>
+                  <div className="flex items-center gap-4"><div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center"><MessageCircle className="h-6 w-6 text-white" /></div><div><p className="text-2xl font-bold text-neutral-900">WhatsApp</p><p className="text-neutral-400">Native Experience</p></div></div>
                   <div className="flex items-center gap-4"><div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center"><Zap className="h-6 w-6 text-white" /></div><div><p className="text-2xl font-bold text-neutral-900">&lt;2 Seconds</p><p className="text-neutral-400">Response Time</p></div></div>
                 </div>
               </PremiumCard>
@@ -1352,22 +1427,22 @@ function SecuritySection() {
   const t = useTranslations()
 
   const items = [
-    { icon: <Lock className="h-7 w-7 text-white" />, color: "from-violet-500 to-purple-500", titleKey: "encryption", descKey: "encryptionDesc" },
-    { icon: <ShieldCheck className="h-7 w-7 text-white" />, color: "from-indigo-500 to-blue-500", titleKey: "noDataSharing", descKey: "noDataSharingDesc" },
+    { icon: <Lock className="h-7 w-7 text-white" />, color: "from-emerald-500 to-teal-500", titleKey: "encryption", descKey: "encryptionDesc" },
+    { icon: <ShieldCheck className="h-7 w-7 text-white" />, color: "from-sky-500 to-cyan-500", titleKey: "noDataSharing", descKey: "noDataSharingDesc" },
     { icon: <ShieldCheck className="h-7 w-7 text-white" />, color: "from-green-500 to-emerald-500", titleKey: "whatsappSecurity", descKey: "whatsappSecurityDesc" },
   ]
 
   return (
-    <section className="py-24 px-6 bg-gradient-to-b from-violet-50/30 to-white">
+    <section className="py-24 px-6 bg-gradient-to-b from-neutral-50/60 via-white to-white">
       <div className="max-w-5xl mx-auto">
         <StaggerContainer className="text-center mb-20">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">{t.security?.label ?? "Security"}</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{t.security?.label ?? "Security"}</span></StaggerItem>
           <StaggerItem><h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mt-4">{t.security?.title ?? "Your privacy is"} <GradientText>{t.security?.titleHighlight ?? "our priority"}</GradientText></h2></StaggerItem>
         </StaggerContainer>
         <StaggerContainer className="grid md:grid-cols-3 gap-8">
           {items.map((item) => (
             <StaggerItem key={item.titleKey}>
-              <motion.div whileHover={{ y: -4 }} className="group bg-white rounded-2xl p-10 border border-neutral-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] text-center hover:shadow-[0_2px_4px_rgba(0,0,0,0.04),0_12px_32px_rgba(0,0,0,0.08)] transition-all">
+              <motion.div whileHover={{ y: -6 }} className="group bg-white rounded-2xl p-10 border border-neutral-200/80 shadow-[var(--shadow-md)] text-center hover:shadow-[var(--shadow-lg)] hover:border-neutral-300/80 transition-all duration-300">
                 <div className="relative inline-block mb-5">
                   <div className={cn("absolute inset-0 rounded-2xl blur-2xl opacity-20 group-hover:opacity-40 scale-150 transition-opacity bg-gradient-to-br", item.color)} />
                   <div className={cn("relative w-16 h-16 rounded-2xl bg-gradient-to-br flex items-center justify-center", item.color)}>
@@ -1375,7 +1450,7 @@ function SecuritySection() {
                   </div>
                 </div>
                 <h3 className="text-xl font-semibold text-neutral-900 mb-3">{(t.security as any)?.[item.titleKey] ?? item.titleKey}</h3>
-                <p className="text-neutral-500">{(t.security as any)?.[item.descKey] ?? item.descKey}</p>
+                <p className="text-neutral-600">{(t.security as any)?.[item.descKey] ?? item.descKey}</p>
               </motion.div>
             </StaggerItem>
           ))}
@@ -1392,10 +1467,10 @@ function FAQSection() {
   const faqIds = ["q1", "q2", "q3", "q4"] as const
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-6 bg-gradient-to-b from-white via-neutral-50/50 to-white">
       <div className="max-w-3xl mx-auto">
         <StaggerContainer className="text-center mb-16">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">{t.faq.label}</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">{t.faq.label}</span></StaggerItem>
           <StaggerItem><h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mt-4">{t.faq.title} <GradientText>{t.faq.titleHighlight}</GradientText></h2></StaggerItem>
         </StaggerContainer>
         <StaggerContainer className="space-y-4">
@@ -1404,21 +1479,21 @@ function FAQSection() {
               <div className={cn(
                 "bg-white rounded-2xl overflow-hidden transition-all duration-300",
                 open === i
-                  ? "border border-violet-200 ring-1 ring-violet-100 shadow-[0_2px_4px_rgba(0,0,0,0.04),0_8px_24px_rgba(124,58,237,0.08)]"
-                  : "border border-neutral-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]"
+                  ? "border border-neutral-300 ring-1 ring-neutral-200 shadow-[var(--shadow-md)]"
+                  : "border border-neutral-200 shadow-[var(--shadow-sm)]"
               )}>
                 <button onClick={() => setOpen(open === i ? null : i)} className="w-full flex items-center gap-4 p-6 text-left">
                   <span className={cn(
                     "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors",
-                    open === i ? "bg-violet-100 text-violet-600" : "bg-neutral-100 text-neutral-400"
+                    open === i ? "bg-neutral-900 text-white" : "bg-neutral-100 text-neutral-400"
                   )}>{i + 1}</span>
                   <span className="text-lg font-medium text-neutral-900 flex-1">{t.faq[id]}</span>
-                  <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.3 }}><ChevronDown className="h-5 w-5 text-violet-500" /></motion.div>
+                  <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.3 }}><ChevronDown className="h-5 w-5 text-neutral-400" /></motion.div>
                 </button>
                 <AnimatePresence>
                   {open === i && (
                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}>
-                      <p className="px-6 pb-6 pl-[4.5rem] text-neutral-500">{t.faq[`a${i + 1}` as keyof typeof t.faq]}</p>
+                      <p className="px-6 pb-6 pl-[4.5rem] text-neutral-600">{t.faq[`a${i + 1}` as keyof typeof t.faq]}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -1435,13 +1510,13 @@ function FAQSection() {
 function ContactSection() {
   return (
     <section id="contact" className="py-24 px-6 relative overflow-hidden">
-      <div className="absolute top-10 right-[10%] w-[350px] h-[350px] bg-gradient-to-r from-violet-100/30 to-indigo-100/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-10 left-[5%] w-[300px] h-[300px] bg-gradient-to-r from-blue-100/20 to-violet-100/15 rounded-full blur-[100px]" />
+      <div className="absolute top-10 right-[10%] w-[350px] h-[350px] bg-gradient-to-r from-amber-100/20 to-orange-100/15 rounded-full blur-[100px]" />
+      <div className="absolute bottom-10 left-[5%] w-[300px] h-[300px] bg-gradient-to-r from-violet-100/15 to-purple-100/10 rounded-full blur-[100px]" />
       <div className="max-w-4xl mx-auto relative z-10">
         <StaggerContainer className="text-center mb-16">
-          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-violet-100/80 border border-violet-200/60 text-violet-600 text-sm font-semibold tracking-wider uppercase">Contact</span></StaggerItem>
+          <StaggerItem><span className="inline-flex items-center px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200/80 text-neutral-600 text-sm font-semibold tracking-wider uppercase">Contact</span></StaggerItem>
           <StaggerItem><h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 mt-4">Get in <GradientText>Touch</GradientText></h2></StaggerItem>
-          <StaggerItem><p className="text-neutral-500 mt-4 max-w-xl mx-auto">Have questions or feedback? We&apos;d love to hear from you. Reach out to us through any of these channels.</p></StaggerItem>
+          <StaggerItem><p className="text-neutral-600 mt-4 max-w-xl mx-auto">Have questions or feedback? We&apos;d love to hear from you. Reach out to us through any of these channels.</p></StaggerItem>
         </StaggerContainer>
         <StaggerContainer className="grid md:grid-cols-3 gap-6">
           <StaggerItem>
@@ -1450,7 +1525,7 @@ function ContactSection() {
                 <div className="p-8 text-center">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center mx-auto mb-4"><MessageCircle className="h-7 w-7 text-white" /></div>
                   <h3 className="text-lg font-semibold text-neutral-900 mb-2">WhatsApp</h3>
-                  <p className="text-neutral-500 text-sm mb-4">Chat with D23 AI directly</p>
+                  <p className="text-neutral-600 text-sm mb-4">Chat with D23 AI directly</p>
                   <Link href="https://wa.me/919934438606" target="_blank" className="text-violet-600 hover:text-violet-500 text-sm font-medium">+91 85488 19349</Link>
                 </div>
               </PremiumCard>
@@ -1462,7 +1537,7 @@ function ContactSection() {
                 <div className="p-8 text-center">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-500 flex items-center justify-center mx-auto mb-4"><svg className="h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
                   <h3 className="text-lg font-semibold text-neutral-900 mb-2">Email</h3>
-                  <p className="text-neutral-500 text-sm mb-4">For business inquiries</p>
+                  <p className="text-neutral-600 text-sm mb-4">For business inquiries</p>
                   <Link href="mailto:hello@d23.ai" className="text-violet-600 hover:text-violet-500 text-sm font-medium">hello@d23.ai</Link>
                 </div>
               </PremiumCard>
@@ -1474,7 +1549,7 @@ function ContactSection() {
                 <div className="p-8 text-center">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center mx-auto mb-4"><svg className="h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
                   <h3 className="text-lg font-semibold text-neutral-900 mb-2">Twitter/X</h3>
-                  <p className="text-neutral-500 text-sm mb-4">Follow us for updates</p>
+                  <p className="text-neutral-600 text-sm mb-4">Follow us for updates</p>
                   <Link href="https://twitter.com/D23AI" target="_blank" className="text-violet-600 hover:text-violet-500 text-sm font-medium">@D23AI</Link>
                 </div>
               </PremiumCard>
@@ -1495,7 +1570,7 @@ function CTASection() {
       <div className="max-w-4xl mx-auto">
         <TiltCard>
           <div className="relative rounded-3xl overflow-hidden">
-            <motion.div animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-violet-600 via-indigo-600 to-blue-600 bg-[length:200%_auto]" />
+            <motion.div animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-violet-600 via-purple-600 to-fuchsia-600 bg-[length:200%_auto]" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
             <div className="relative z-10 p-12 md:p-20 text-center">
               <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-4xl md:text-5xl font-bold text-white mb-6">{t.cta.title}</motion.h2>
@@ -1519,21 +1594,27 @@ function Footer() {
   return (
     <footer className="py-12 px-6 border-t border-neutral-200">
       <div className="max-w-6xl mx-auto">
-        <div className="relative rounded-3xl border border-neutral-200/80 bg-gradient-to-b from-neutral-50 to-white backdrop-blur-xl p-8 overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]">
-          <div className="absolute top-0 left-1/4 w-64 h-64 bg-violet-100/50 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl" />
+        <div className="relative rounded-3xl border border-neutral-200/80 bg-gradient-to-b from-neutral-50 to-white backdrop-blur-xl p-8 overflow-hidden shadow-[var(--shadow-md)]">
+          <div className="absolute top-0 left-1/4 w-64 h-64 bg-violet-100/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-amber-100/30 rounded-full blur-3xl" />
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
-              <Image src="/d23ai-logo-v8.svg" alt="D23 AI" width={40} height={40} />
+              <Image src="/d23-logo-icon.png" alt="D23 AI" width={40} height={40} />
               <div><p className="text-lg font-bold text-neutral-900">D23 <GradientText>AI</GradientText></p><p className="text-sm text-neutral-400">{t.footer.tagline}</p></div>
             </div>
             <MagneticButton><Link href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F" target="_blank" className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-medium shadow-lg shadow-violet-500/15">{t.footer.button}</Link></MagneticButton>
           </div>
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-neutral-200">
             <div className="flex items-center gap-4">
-              {[{ icon: "X", href: "#" }, { icon: "IG", href: "#" }, { icon: "GH", href: "#" }].map((social) => (
-                <Link key={social.icon} href={social.href} className="w-10 h-10 rounded-full bg-violet-50 border border-violet-200 flex items-center justify-center text-violet-500 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-indigo-500 hover:border-transparent transition-all text-xs font-bold">{social.icon}</Link>
-              ))}
+              <Link href="#" className="w-10 h-10 rounded-full bg-violet-50 border border-violet-200 flex items-center justify-center text-violet-500 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-indigo-500 hover:border-transparent transition-all">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </Link>
+              <Link href="#" className="w-10 h-10 rounded-full bg-violet-50 border border-violet-200 flex items-center justify-center text-violet-500 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-indigo-500 hover:border-transparent transition-all">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </Link>
+              <Link href="#" className="w-10 h-10 rounded-full bg-violet-50 border border-violet-200 flex items-center justify-center text-violet-500 hover:text-white hover:bg-gradient-to-r hover:from-violet-500 hover:to-indigo-500 hover:border-transparent transition-all">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              </Link>
             </div>
             <p className="text-sm text-neutral-400">{t.footer.copyright}</p>
           </div>
@@ -1549,7 +1630,7 @@ function FloatingWhatsAppButton() {
     <Link
       href="https://wa.me/919934438606?text=Hey%20D23%20AI%21%20What%20can%20you%20do%3F"
       target="_blank"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition-transform animate-pulse"
+      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] flex items-center justify-center hover:scale-110 transition-transform animate-whatsapp-pulse"
       aria-label="Chat on WhatsApp"
     >
       <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -1566,7 +1647,7 @@ function PageContent() {
   if (!hydrated) {
     return (
       <div className="min-h-screen bg-white text-neutral-900 flex items-center justify-center">
-        <div className="animate-pulse"><Image src="/d23ai-logo-v8.svg" alt="D23" width={80} height={80} priority /></div>
+        <div className="animate-pulse"><Image src="/d23-logo-icon.png" alt="D23" width={80} height={80} priority /></div>
       </div>
     )
   }

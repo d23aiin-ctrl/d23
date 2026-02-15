@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   generator: "d23.ai",
   metadataBase: new URL("https://d23.ai"),
   icons: {
-    icon: "/d23ai-logo-v8.svg",
+    icon: "/d23-logo-icon.png",
     apple: "/apple-icon.png",
   },
   openGraph: {

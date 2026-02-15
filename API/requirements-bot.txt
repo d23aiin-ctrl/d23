@@ -1,6 +1,0 @@
-# WhatsApp Bot specific dependencies
-# Include common requirements
--r requirements.txt
-
-# Additional bot-specific dependencies
-# (Add any WhatsApp bot specific packages here)
